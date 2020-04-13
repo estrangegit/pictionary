@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('head-section'); %>
+        <title>Accueil</title>
+    </head>
+ 
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron text-center col-lg-12">
+                    <h1 class="font-weight-light">Bienvenue au pictionary</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-lg-4 col-lg-4">
+                    <form action="/pictionary/pseudo" method="post">
+                        <div class="form-group row">
+                          <label for="pseudo" class="col-lg-2 col-form-label">Pseudo</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Enter pseudo">
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-light">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <%- include('script-section') %>
+    </body>
+</html>
