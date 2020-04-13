@@ -1,3 +1,3 @@
 $(function(){
-    console.log('game.js has been loaded');
+    console.log('game.js script charged');
 })

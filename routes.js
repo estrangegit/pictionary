@@ -12,8 +12,11 @@ router.get('/game', function(req, res){
 });
 
 router.post('/pseudo', urlEncodedParser, function(req, res){
-    console.log(req.body.pseudo);
-    res.redirect('/pictionary/game');
+    if(req.body.pseudo.trim().length > 0){
+        res.redirect('/pictionary/game');
+    } else {
+        res.redirect('/pictionary');
+    }
 });
 
 module.exports = router;
