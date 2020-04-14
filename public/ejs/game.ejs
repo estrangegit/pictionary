@@ -9,10 +9,26 @@
         <div class="container">
             <div class="row">
                 <div class="jumbotron text-center col-lg-12">
-                    <h2 class="font-weight-light">Salle de jeu</h2>
+                    <h2 id="title"
+                        data-pseudo=<%= pseudo %>
+                        class="font-weight-light">
+                        Bienvenue <%= pseudo %>
+                    </h2>
                 </div>
             </div>
+            <div class="row">
+                <div class="jumbotron text-center offset-lg-3 col-lg-6">
+                    <h4 class="font-weight-light">Communication avec socket.io !</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-lg-4">
+                    <button id="poke" class="btn btn-light">Envoyer un message au serveur</button>
+                </div>
+            </div>
+        
             <%- include('script-section') %>
+            <script src="/socket.io/socket.io.js"></script>
             <script src="/public/js/game.js"></script>
         </body>
 </html>

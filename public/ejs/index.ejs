@@ -18,10 +18,17 @@
                         <div class="form-group row">
                           <label for="pseudo" class="col-lg-2 col-form-label">Pseudo</label>
                           <div class="col-lg-10">
-                              <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Enter pseudo">
+                              <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Entrez votre pseudo">
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-light">Submit</button>
+                        <% if (error) {%>
+                        <div class="row">
+                            <div class="alert alert-danger col-lg-12">
+                                <%= error %>
+                            </div>
+                        </div>    
+                        <% } %>
+                        <button type="submit" class="btn btn-light">Soumettre</button>
                     </form>
                 </div>
             </div>

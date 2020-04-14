@@ -1,5 +1,6 @@
 const http = require('http');
 const app = require('./app');
+const connection = require('./socket/socket-connection');
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -45,4 +46,10 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
+const io = require('socket.io').listen(server);
+
+io.sockets.on('connection', connection);
+
 server.listen(port);
+
+module.exports = server;
