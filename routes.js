@@ -6,8 +6,8 @@ const connectedUsers = require('./model/connectedUsers');
 
 router.get('/', function(req, res){
     let error = req.cookies['error'];
-    res.clearCookie('error', {httpOnly: true});
     if(typeof error !== 'undefined'){
+        res.clearCookie('error', {httpOnly: true});
         res.render('index.ejs', {error: error});
     } else {
         res.render('index.ejs', {error: null});
