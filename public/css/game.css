@@ -1,0 +1,46 @@
+.jumbotron {
+   padding-top: 10px;
+   padding-bottom: 10px; 
+}
+
+#participantList {
+    padding-right: 15%;
+}
+
+span.pseudo-user {
+    text-decoration: underline;
+}
+
+#drawArea, #chatArea {
+    height: 500px;
+    border: 1px solid #4d4d4d;
+    margin-bottom: 20px;
+}
+#drawArea {
+    border-radius: 10px 0px 0px 10px;
+    border-right-style: none;
+}
+
+#chatArea {
+    border-radius: 0px 10px 10px 0px;
+    padding-right: 0px;
+    padding-left: 2%;
+    padding-top: 2%;
+}
+
+.inputProposal {
+    margin-bottom: 20px;
+}
+
+#chatArea ul.proposals {
+    list-style: none;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 0px;
+    height: 95%;
+    overflow-y: auto;
+}
+
+#chatArea ul.proposals li span.pseudo {
+    text-decoration: underline;
+}

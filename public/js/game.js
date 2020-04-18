@@ -1,17 +1,23 @@
 $(function(){
+    $gameOn = $('#game-on');
+    $gameWaiting = $('#game-waiting');
+    $gameLauncher = $('#game-launcher');
+
+    $gameOn.hide();
+
     const socket = io.connect('http://localhost:8080');
-    $title = $('#title');
-    $poke = $('#poke');
 
-    let pseudo = $title.data('pseudo');
-
-    socket.emit('new-user', pseudo);
-
-    socket.on('message', function(message) {
-        alert('Le serveur a un message pour vous : ' + message);
+    $gameLauncher.click(() => {
+        $gameWaiting.hide();
+        $gameOn.show();
+        socket.emit('game-start');
     })
 
-    $('#poke').click(function () {
-        socket.emit('message', 'Salut serveur, ça va ?');
+    socket.on('game-start', function(){
+        $gameWaiting.hide();
+        $gameOn.show();
     })
+
+    $.fn.connection(socket);
+    $.fn.chat(socket);
 })

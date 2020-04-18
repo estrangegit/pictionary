@@ -1,6 +1,6 @@
 const http = require('http');
 const app = require('./app');
-const connection = require('./socket/socket-connection');
+const game = require('./socket/socket-jeu');
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -48,7 +48,7 @@ server.on('listening', () => {
 
 const io = require('socket.io').listen(server);
 
-io.sockets.on('connection', connection);
+io.sockets.on('connection', game);
 
 server.listen(port);
 

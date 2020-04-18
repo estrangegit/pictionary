@@ -2,6 +2,7 @@
 <html>
     <head>
         <%- include('head-section'); %>
+        <link rel="stylesheet" href="/public/css/game.css" type="text/css">
         <title>Salle de jeu</title>
     </head>
 
@@ -9,26 +10,54 @@
         <div class="container">
             <div class="row">
                 <div class="jumbotron text-center col-lg-12">
-                    <h2 id="title"
-                        data-pseudo=<%= pseudo %>
-                        class="font-weight-light">
-                        Bienvenue <%= pseudo %>
-                    </h2>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <a href="/pictionary">
+                                <span class="fa fa-arrow-left"></span>
+                            </a>
+                        </div>
+                        <div class="col-lg-10">
+                            <h3 id="participantList"
+                                data-pseudo=<%= pseudo %>
+                                class="font-weight-light">
+                                Liste des participants: ...
+                            </h3>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="jumbotron text-center offset-lg-3 col-lg-6">
-                    <h4 class="font-weight-light">Communication avec socket.io !</h4>
+            <div id="game-waiting">
+                <div class="row">
+                    <div class="jumbotron col-lg-12 text-center">
+                        <h4 class="font-weight-light">En attente des participants</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div id="game-launcher" class="btn btn-primary">Lancer le jeu</div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="offset-lg-4">
-                    <button id="poke" class="btn btn-light">Envoyer un message au serveur</button>
+            <div id="game-on">
+                <div class="row">
+                    <div id="drawArea" class="col-lg-9">
+    
+                    </div>
+                    <div id="chatArea" class="col-lg-3">
+                        <ul class="proposals"></ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-lg-9 col-lg-3">
+                        <input type="text" class="form-control inputProposal" placeholder="Votre proposition..."/>
+                    </div>
                 </div>
             </div>
-        
-            <%- include('script-section') %>
-            <script src="/socket.io/socket.io.js"></script>
-            <script src="/public/js/game.js"></script>
-        </body>
+        </div>
+        <%- include('script-section') %>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/public/js/game-chat.js"></script>
+        <script src="/public/js/game-connection.js"></script>
+        <script src="/public/js/game.js"></script>
+    </body>
 </html>

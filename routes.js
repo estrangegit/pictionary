@@ -31,6 +31,7 @@ router.post('/pseudo', urlEncodedParser, function(req, res){
             res.redirect('/pictionary/game');
         }
     } else {
+        res.cookie('error', 'Entrez un pseudo valide', {httpOnly: true});
         res.redirect('/pictionary');
     }
 });
