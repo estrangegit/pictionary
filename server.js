@@ -1,6 +1,6 @@
 const http = require('http');
 const app = require('./app');
-const game = require('./socket/socket-jeu');
+const game = require('./socket/socket-game');
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
