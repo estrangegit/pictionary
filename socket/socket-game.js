@@ -1,5 +1,6 @@
 const connection = require('./socket-connection');
 const chat = require('./socket-chat');
+const whiteboard = require('./socket-whiteboard');
 const gameData = require('../model/gameData');
 
 game = (socket) => {
@@ -11,6 +12,7 @@ game = (socket) => {
 
     connection(socket);
     chat(socket);
+    whiteboard(socket);
 };
 
 module.exports = game;

@@ -1,23 +1,21 @@
 $(function(){
     $gameOn = $('#game-on');
-    $gameWaiting = $('#game-waiting');
-    $gameLauncher = $('#game-launcher');
-
     $gameOn.hide();
+
+    $gameLauncher = $('#game-launcher');
 
     const socket = io.connect('http://localhost:8080');
 
     $gameLauncher.click(() => {
-        $gameWaiting.hide();
-        $gameOn.show();
+        $.fn.initialization();        
         socket.emit('game-start');
     })
 
     socket.on('game-start', function(){
-        $gameWaiting.hide();
-        $gameOn.show();
+        $.fn.initialization();
     })
 
     $.fn.connection(socket);
     $.fn.chat(socket);
+    $.fn.whiteboard(socket);
 })

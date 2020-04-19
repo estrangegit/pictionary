@@ -41,14 +41,24 @@
             <div id="game-on">
                 <div class="row">
                     <div id="drawArea" class="col-lg-9">
-    
+                        <canvas class="whiteboard" width="700" height="500" ></canvas>
                     </div>
                     <div id="chatArea" class="col-lg-3">
                         <ul class="proposals"></ul>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="offset-lg-9 col-lg-3">
+                    <div id="colors" class="col-lg-9">
+                        <div class="color black"></div>
+                        <div class="color red"></div>
+                        <div class="color green"></div>
+                        <div class="color blue"></div>
+                        <div class="color yellow"></div>
+                        <div class="clean-whiteboard">
+                            <span class="fa fa-trash"></span>
+                        </div>
+                    </div>
+                    <div id="chatProposal" class="col-lg-3">
                         <input type="text" class="form-control inputProposal" placeholder="Votre proposition..."/>
                     </div>
                 </div>
@@ -56,7 +66,9 @@
         </div>
         <%- include('script-section') %>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/public/js/game-initialization.js"></script>
         <script src="/public/js/game-chat.js"></script>
+        <script src="/public/js/game-whiteboard.js"></script>
         <script src="/public/js/game-connection.js"></script>
         <script src="/public/js/game.js"></script>
     </body>

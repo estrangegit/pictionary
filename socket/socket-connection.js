@@ -12,6 +12,11 @@ connection = (socket) => {
     socket.on('disconnect', () => {
         let pseudo = connectedUsers.getPseudoById(socket.id);
         connectedUsers.remove(pseudo);
+        
+        if(connectedUsers.getPseudoList().length == 0){
+            gameData.stopGame();
+        }
+        
         socket.broadcast.emit('participant-list', connectedUsers.getPseudoList());
     });
 };

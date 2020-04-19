@@ -1,6 +1,5 @@
 let gameData = {
-    gameStarted : false,
-    
+    gameStarted : false,    
     startGame: () => {
         gameData.gameStarted = true;
     },
@@ -11,7 +10,7 @@ let gameData = {
 
     hasGameStarted: () => {
         return gameData.gameStarted;
-    }
+    },
 }
 
 module.exports = gameData;

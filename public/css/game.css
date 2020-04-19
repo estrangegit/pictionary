@@ -19,7 +19,39 @@ span.pseudo-user {
 #drawArea {
     border-radius: 10px 0px 0px 10px;
     border-right-style: none;
+    position: relative;
 }
+
+#drawArea canvas.whiteboard {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    cursor: crosshair;
+  }
+    
+div#colors div.color, div#colors div.clean-whiteboard {
+    display: inline-block;
+    width: 5%;
+}
+
+div#colors div.clean-whiteboard span {
+    font-size: 250%;
+    position: relative;
+    bottom: 15%;
+    left: 150%;
+    color: grey;
+    cursor: pointer;
+}
+
+div#colors div.color.black { background-color: black; }
+div#colors div.color.red { background-color: red; }
+div#colors div.color.green { background-color: green; }
+div#colors div.color.blue { background-color: blue; }
+div#colors div.color.yellow { background-color: yellow; }
 
 #chatArea {
     border-radius: 0px 10px 10px 0px;
@@ -28,9 +60,6 @@ span.pseudo-user {
     padding-top: 2%;
 }
 
-.inputProposal {
-    margin-bottom: 20px;
-}
 
 #chatArea ul.proposals {
     list-style: none;
@@ -43,4 +72,8 @@ span.pseudo-user {
 
 #chatArea ul.proposals li span.pseudo {
     text-decoration: underline;
+}
+
+#chatProposal .inputProposal {
+    margin-bottom: 20px;
 }

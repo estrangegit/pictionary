@@ -22,8 +22,7 @@
 
         socket.on('state-game', function(hasGameStarted) {
             if(hasGameStarted){
-                $gameWaiting.hide();
-                $gameOn.show();
+               $.fn.initialization();
             }
         })
     };
