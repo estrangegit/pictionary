@@ -1,9 +1,10 @@
 const connectedUsers = require('../model/connectedUsers')
+const socketConstants = require('../model/socketConstants');
 
 chat = (socket) => {
-  socket.on('new-proposal', (proposal) => {
+  socket.on(socketConstants.NEW_PROPOSAL, (proposal) => {
     let pseudo = connectedUsers.getPseudoById(socket.id);
-    socket.broadcast.emit('new-proposal', {
+    socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {
       pseudo: pseudo,
       proposal: proposal
     });

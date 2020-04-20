@@ -1,15 +1,16 @@
 const connectedUsers = require('../model/connectedUsers');
 const gameData = require('../model/gameData');
+const socketConstants = require('../model/socketConstants');
 
 connection = (socket) => {
-    socket.on('new-user', (pseudo) => {
+    socket.on(socketConstants.NEW_USER, (pseudo) => {
         connectedUsers.push({pseudo: pseudo, id:socket.id});
-        socket.broadcast.emit('participant-list', connectedUsers.getPseudoList());
-        socket.emit('participant-list', connectedUsers.getPseudoList());
-        socket.emit('state-game', gameData.hasGameStarted());
+        socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoList());
+        socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoList());
+        socket.emit(socketConstants.GAME_START, gameData.hasGameStarted());
     });
 
-    socket.on('disconnect', () => {
+    socket.on(socketConstants.DISCONNECT, () => {
         let pseudo = connectedUsers.getPseudoById(socket.id);
         connectedUsers.remove(pseudo);
         
@@ -17,7 +18,7 @@ connection = (socket) => {
             gameData.stopGame();
         }
         
-        socket.broadcast.emit('participant-list', connectedUsers.getPseudoList());
+        socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoList());
     });
 };
 

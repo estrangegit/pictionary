@@ -1,10 +1,10 @@
-const gameData = require('../model/gameData');
+const socketConstants = require('../model/socketConstants');
 
 whiteboard = (socket) => {
-    socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+    socket.on(socketConstants.DRAWING, (data) => socket.broadcast.emit(socketConstants.DRAWING, data));
     
-    socket.on('clean-whiteboard', () => {
-        socket.broadcast.emit('clean-whiteboard');
+    socket.on(socketConstants.CLEAN_WHITEBOARD, () => {
+        socket.broadcast.emit(socketConstants.CLEAN_WHITEBOARD);
     })
 };
 

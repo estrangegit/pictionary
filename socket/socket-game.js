@@ -2,12 +2,13 @@ const connection = require('./socket-connection');
 const chat = require('./socket-chat');
 const whiteboard = require('./socket-whiteboard');
 const gameData = require('../model/gameData');
+const socketConstants = require('../model/socketConstants');
 
 game = (socket) => {
 
-    socket.on('game-start', () => {
+    socket.on(socketConstants.GAME_START, () => {
         gameData.startGame();
-        socket.broadcast.emit('game-start');        
+        socket.broadcast.emit(socketConstants.GAME_START);
     })
 
     connection(socket);
