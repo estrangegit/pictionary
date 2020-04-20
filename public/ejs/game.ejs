@@ -9,14 +9,14 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="jumbotron text-center col-lg-12">
+                <div class="jumbotron text-center col-sm-12">
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-sm-2">
                             <a href="/pictionary">
                                 <span class="fa fa-arrow-left"></span>
                             </a>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-sm-10">
                             <h3 id="participantList"
                                 data-pseudo=<%= pseudo %>
                                 class="font-weight-light">
@@ -28,27 +28,27 @@
             </div>
             <div id="game-waiting">
                 <div class="row">
-                    <div class="jumbotron col-lg-12 text-center">
+                    <div class="jumbotron col-sm-12 text-center">
                         <h4 class="font-weight-light">En attente des participants</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 text-center">
+                    <div class="col-sm-12 text-center">
                         <div id="game-launcher" class="btn btn-primary">Lancer le jeu</div>
                     </div>
                 </div>
             </div>
             <div id="game-on">
                 <div class="row">
-                    <div id="drawArea" class="col-lg-9">
+                    <div id="drawArea" class="col-sm-9">
                         <canvas class="whiteboard" width="700" height="500" ></canvas>
                     </div>
-                    <div id="chatArea" class="col-lg-3">
+                    <div id="chatArea" class="col-sm-3">
                         <ul class="proposals"></ul>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="colors" class="col-lg-9">
+                    <div id="colors" class="col-sm-9">
                         <div class="color black"></div>
                         <div class="color red"></div>
                         <div class="color green"></div>
@@ -58,7 +58,7 @@
                             <span class="fa fa-trash"></span>
                         </div>
                     </div>
-                    <div id="chatProposal" class="col-lg-3">
+                    <div id="chatProposal" class="col-sm-3">
                         <input type="text" class="form-control inputProposal" placeholder="Votre proposition..."/>
                     </div>
                 </div>

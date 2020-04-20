@@ -77,3 +77,18 @@ div#colors div.color.yellow { background-color: yellow; }
 #chatProposal .inputProposal {
     margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .inputProposal::-webkit-input-placeholder { /* WebKit browsers */
+        color: transparent;
+    }
+    .inputProposal:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color: transparent;
+    }
+    .inputProposal::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color: transparent;
+    }
+   .inputProposal:-ms-input-placeholder { /* Internet Explorer 10+ */
+       color: transparent;
+    }
+}

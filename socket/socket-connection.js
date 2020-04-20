@@ -23,4 +23,3 @@ connection = (socket) => {
 };
 
 module.exports = connection;
-
