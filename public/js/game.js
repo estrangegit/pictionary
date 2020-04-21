@@ -7,15 +7,15 @@ $(function(){
     const socket = io.connect('http://localhost:8080');
 
     $gameLauncher.click(() => {
-        $.fn.initialization();        
+        gameInitialization();
         socket.emit('game-start');
     })
 
     socket.on('game-start', function(){
-        $.fn.initialization();
+        gameInitialization();
     })
 
-    $.fn.connection(socket);
-    $.fn.chat(socket);
-    $.fn.whiteboard(socket);
+    gameConnection(socket);
+    gameChat(socket);
+    gameWhiteboard(socket);
 })

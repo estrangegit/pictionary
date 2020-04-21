@@ -1,13 +1,11 @@
-(function($){
-    $.fn.initialization = function(){
-        $gameOn = $('#game-on');
-        $gameWaiting = $('#game-waiting');
+const gameInitialization = function(){
+    $gameOn = $('#game-on');
+    $gameWaiting = $('#game-waiting');
 
-        $gameWaiting.hide();
-        $gameOn.show();
+    $gameWaiting.hide();
+    $gameOn.show();
 
-        let colorWidth = $('.color').width();
-        $('.color').css({'height': colorWidth + 'px'});
-        $('.clean-whiteboard').css({'height': colorWidth + 'px'});
-    };
-})(jQuery)
+    let colorWidth = $('.color').width();
+    $('.color').css({'height': colorWidth + 'px'});
+    $('.clean-whiteboard').css({'height': colorWidth + 'px'});
+};
