@@ -8,8 +8,8 @@ let connectedUsers = {
     remove : (pseudo) => {
         connectedUsers.users = connectedUsers.users.filter(user => user.pseudo != pseudo);
     },
-    getPseudoList : () => {
-        return connectedUsers.users.map(user => user.pseudo);
+    getPseudoAndScoreList : () => {
+        return connectedUsers.users.map(user => {return {pseudo: user.pseudo, score: user.score}});
     },
     getIdListWhoHasNotDrawn : () => {
         return connectedUsers.users.filter(user => user.hasDrawn == false).map(user => user.id);
