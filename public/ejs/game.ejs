@@ -2,7 +2,7 @@
 <html>
     <head>
         <%- include('head-section'); %>
-        <link rel="stylesheet" href="/public/css/game.css" type="text/css">
+        <link rel="stylesheet" href="/public/css/game.css" type="text/css" />
         <title>Salle de jeu</title>
     </head>
 
@@ -17,15 +17,12 @@
                             </a>
                         </div>
                         <div class="col-sm-5">
-                            <h3 id="participantList"
-                                data-pseudo=<%= pseudo %>
-                                class="font-weight-light">
+                            <h3 id="participantList" data-pseudo=<%= pseudo %> class="font-weight-light">
                                 Liste des participants: ...
                             </h3>
                         </div>
                         <div class="col-sm-5">
-                            <h5 id="scoreList"
-                                class="font-weight-light">
+                            <h5 id="scoreList" class="font-weight-light">
                                 Scores: ...
                             </h5>
                         </div>
@@ -35,19 +32,41 @@
             <div id="game-waiting">
                 <div class="row">
                     <div class="jumbotron col-sm-12 text-center">
-                        <h4 class="font-weight-light">En attente des participants</h4>
+                        <h4 class="font-weight-light">
+                            En attente des participants
+                        </h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <div id="game-launcher" class="btn btn-primary">Lancer le jeu</div>
+                        <div id="game-launcher" class="btn btn-primary">
+                            Lancer le jeu
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="game-show-word">
+                <div class="row">
+                    <div class="jumbotron col-sm-12 text-center">
+                        <h4 id="message-role" class="font-weight-light"></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <div id="session-launcher" class="btn btn-primary">
+                            Dessiner le mot
+                        </div>
                     </div>
                 </div>
             </div>
             <div id="game-on">
                 <div class="row">
                     <div id="drawArea" class="col-sm-9">
-                        <canvas class="whiteboard" width="700" height="500" ></canvas>
+                        <canvas
+                            class="whiteboard"
+                            width="700"
+                            height="500"
+                        ></canvas>
                     </div>
                     <div id="chatArea" class="col-sm-3">
                         <ul class="proposals"></ul>
@@ -65,14 +84,19 @@
                         </div>
                     </div>
                     <div id="chatProposal" class="col-sm-3">
-                        <input type="text" class="form-control inputProposal" placeholder="Votre proposition..."/>
+                        <input
+                            type="text"
+                            class="form-control inputProposal"
+                            placeholder="Votre proposition..."
+                        />
                     </div>
                 </div>
             </div>
         </div>
         <%- include('script-section') %>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/public/js/game-initialization.js"></script>
+        <script src="/public/js/game-transitions.js"></script>
+        <script src="/public/js/game-session.js"></script>
         <script src="/public/js/game-chat.js"></script>
         <script src="/public/js/game-whiteboard.js"></script>
         <script src="/public/js/game-connection.js"></script>

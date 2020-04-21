@@ -1,4 +1,4 @@
-const gameConnection = function(socket){
+const gameConnection = function (socket) {
     $gameOn = $('#game-on');
     $gameWaiting = $('#game-waiting');
 
@@ -9,9 +9,9 @@ const gameConnection = function(socket){
 
     socket.emit('new-user', pseudo);
 
-    socket.on('participant-list', function(participantList) {
+    socket.on('participant-list', function (participantList) {
         let htmlParticipantList = participantList.map(participant => {
-            if(participant.pseudo === pseudo){
+            if (participant.pseudo === pseudo) {
                 return '<span class="pseudo-user">' + participant.pseudo + '</span>';
             } else {
                 return '<span>' + participant.pseudo + '</span>'
@@ -19,7 +19,7 @@ const gameConnection = function(socket){
         });
 
         let htmlScoreList = participantList.map(participant => {
-            if(participant.pseudo === pseudo){
+            if (participant.pseudo === pseudo) {
                 return '<span class="pseudo-user">' + participant.pseudo + '</span><span>: ' + participant.score + '</span>';
             } else {
                 return '<span>' + participant.pseudo + ': </span><span>' + participant.score + '</span>';
@@ -30,9 +30,11 @@ const gameConnection = function(socket){
         $scoreList.html('<span>Score des joueurs</span></br>' + htmlScoreList.join(', '));
     })
 
-    socket.on('state-game', function(hasGameStarted) {
-        if(hasGameStarted){
-            gameInitialization();
+    socket.on('state-game', function (data) {
+        if (data.hasGameStarted && !data.hasSessionStarted) {
+            sessionInitialization(socket, data);
+        } else if (data.hasGameStarted && data.hasSessionStarted) {
+            sessionStart();
         }
     })
 };

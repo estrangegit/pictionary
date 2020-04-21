@@ -15,7 +15,7 @@ let connectedUsers = {
         return connectedUsers.users.filter(user => user.hasDrawn == false).map(user => user.id);
     },
     getPseudoById: (id) => {
-        let user = connectedUsers.users.find(user => user.id == id);        
+        let user = connectedUsers.users.find(user => user.id == id);
         return user? user.pseudo : null;
     },
     doesPseudoExist: (pseudo) => {
@@ -35,6 +35,10 @@ let connectedUsers = {
                 user.hasDrawn = hasDrawn;
             }
         })
+    },
+    getRandomUserWhoHasNotDrawn: () => {
+        let filteredList = connectedUsers.users.filter(user => !user.hasDrawn);
+        return filteredList[Math.floor(Math.random() * filteredList.length)];
     }
 }
 
