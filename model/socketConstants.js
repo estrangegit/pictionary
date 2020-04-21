@@ -4,6 +4,7 @@ let socketConstants = {
     /* socket-connection constants */
     NEW_USER: 'new-user',
     PARTICIPANT_LIST: 'participant-list',
+    STATE_GAME: 'state-game',
     DISCONNECT: 'disconnect',
     /* socket-chat constants */
     NEW_PROPOSAL:'new-proposal',

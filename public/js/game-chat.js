@@ -1,5 +1,5 @@
 const gameChat = function (socket) {
-    var COLORS = [
+    let COLORS = [
         '#e21400', '#91580f', '#f8a700', '#f78b00',
         '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
         '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
@@ -12,14 +12,10 @@ const gameChat = function (socket) {
     let pseudo = $participantList.data('pseudo');
 
     const sendProposal = () => {
-        var proposal = $inputProposal.val();
+        let proposal = $inputProposal.val();
         proposal = cleanInput(proposal);
         if (proposal) {
             $inputProposal.val('');
-            addChatProposal({
-                pseudo: pseudo,
-                proposal: proposal
-            });
             socket.emit('new-proposal', proposal);
         }
     }

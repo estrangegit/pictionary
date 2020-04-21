@@ -8,6 +8,10 @@ chat = (socket) => {
       pseudo: pseudo,
       proposal: proposal
     });
+    socket.emit(socketConstants.NEW_PROPOSAL, {
+      pseudo: pseudo,
+      proposal: proposal
+    });
   });
 };
 
