@@ -52,7 +52,7 @@ let connectedUsers = {
             user.hasDrawn = hasDrawn;
         })
     },
-    initHasGuessedBy: (hasGuessed) => {
+    initHasGuessed: (hasGuessed) => {
         connectedUsers.users.forEach(user => {
             user.hasGuessed = hasGuessed;
         })

@@ -9,6 +9,7 @@ let socketConstants = {
     DISCONNECT: 'disconnect',
     /* socket-chat constants */
     NEW_PROPOSAL:'new-proposal',
+    SESSION_END:'session-end',
     /* socket-whiteboard constants */
     DRAWING: 'drawing',
     CLEAN_WHITEBOARD: 'clean-whiteboard',
