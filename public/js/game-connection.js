@@ -34,7 +34,7 @@ const gameConnection = function (socket) {
         if (data.hasGameStarted && !data.hasSessionStarted) {
             sessionInitialization(socket, data);
         } else if (data.hasGameStarted && data.hasSessionStarted) {
-            sessionStart();
+            sessionStart(socket, data);
         }
     })
 };

@@ -1,15 +1,25 @@
-const sessionStart = function () {
+const sessionStart = function (socket, data) {
     $gameOn = $("#game-on");
     $gameWaiting = $("#game-waiting");
     $gameShowWord = $("#game-show-word");
+    $color = $('.color');
+    $cleanWhiteboard = $('.clean-whiteboard');
+    $chatProposal = $('#chatProposal');
 
     $gameWaiting.hide();
     $gameShowWord.hide();
     $gameOn.show();
 
-    let colorWidth = $(".color").width();
-    $(".color").css({ height: colorWidth + "px" });
-    $(".clean-whiteboard").css({ height: colorWidth + "px" });
+    if(socket.id == data.drawer.id){
+        $chatProposal.hide();
+        let colorWidth = $(".color").width();
+        $(".color").css({ height: colorWidth + "px" });
+        $(".clean-whiteboard").css({ height: colorWidth + "px" });
+    } else {
+        $color.hide();
+        $cleanWhiteboard.hide();
+    }
+
 };
 
 const sessionInitialization = function (socket, data) {

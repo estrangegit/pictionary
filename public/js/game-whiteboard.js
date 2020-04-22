@@ -8,10 +8,11 @@ const gameWhiteboard = function (socket) {
     let CANVAS_WIDTH = 700;
     let CANVAS_HEIGHT = 500;
 
-    var current = {
+    let current = {
         color: 'black'
     };
-    var drawing = false;
+
+    let drawing = false;
 
     $canvas.on('mousedown', onMouseDown);
     $canvas.on('mouseup', onMouseUp);
@@ -34,6 +35,18 @@ const gameWhiteboard = function (socket) {
 
     socket.on('clean-whiteboard', () => {
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    })
+
+    socket.on('session-start', function(data){
+        if(socket.id == data.drawer.id){
+            current.color = 'black';
+        } else {
+            current.color = 'rgba(255, 255, 255, 0)';
+        }
+    })
+
+    socket.on('state-game', function(){
+        current.color = 'rgba(255, 255, 255, 0)';
     })
 
     function drawLine(x0, y0, x1, y1, color, emit) {

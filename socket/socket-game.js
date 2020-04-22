@@ -23,8 +23,8 @@ game = (socket) => {
 
     socket.on(socketConstants.SESSION_START, () => {
         gameData.startSession();
-        socket.broadcast.emit(socketConstants.SESSION_START);
-        socket.emit(socketConstants.SESSION_START);
+        socket.broadcast.emit(socketConstants.SESSION_START, {drawer: gameData.getDrawer()});
+        socket.emit(socketConstants.SESSION_START, {drawer: gameData.getDrawer()});
     })
 
     connection(socket);

@@ -14,7 +14,7 @@ const gameSession = function(socket){
         sessionInitialization(socket, data);
     })
 
-    socket.on('session-start', function(){
-        sessionStart();
+    socket.on('session-start', function(data){
+        sessionStart(socket, data);
     })
 }
