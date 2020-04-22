@@ -2,6 +2,7 @@ let socketConstants = {
     /* socket-game constants */
     GAME_START: 'game-start',
     SESSION_START: 'session-start',
+    GAME_INIT: 'game-init',
     /* socket-connection constants */
     NEW_USER: 'new-user',
     PARTICIPANT_LIST: 'participant-list',

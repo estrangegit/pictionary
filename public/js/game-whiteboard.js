@@ -36,14 +36,6 @@ const gameWhiteboard = function (socket) {
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     })
 
-    socket.on('session-start', function(data){
-        if(socket.id == data.drawer.id){
-            current.color = 'black';
-        } else {
-            current.color = 'rgba(255, 255, 255, 0)';
-        }
-    })
-
     socket.on('state-game', function(){
         current.color = 'rgba(255, 255, 255, 0)';
     })

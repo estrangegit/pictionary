@@ -92,7 +92,7 @@ let gameData = {
     },
 
     isSameThanWordToGuess: (proposal) => {
-        return accentFold(proposal).toUpperCase() == accentFold(gameData.wordToGuess).toUpperCase();
+        return accentFold(proposal.toLowerCase()) == accentFold(gameData.wordToGuess.toLowerCase());
     }
 }
 

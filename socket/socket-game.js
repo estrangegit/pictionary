@@ -27,13 +27,26 @@ let game = (socket) => {
             emitStateGame(socket);
             broadcastStateGame(socket);
         }
-    })
+    });
 
     socket.on(socketConstants.SESSION_START, () => {
         gameData.startSession();
         emitStateGame(socket);
         broadcastStateGame(socket);
-    })
+    });
+
+    socket.on(socketConstants.GAME_INIT, () => {
+        gameData.stopGame();
+        connectedUsers.initHasGuessed(false);
+        connectedUsers.initHasDrawn(false);
+        connectedUsers.initScores(0);
+        gameData.setWordToGuess(null);
+        gameData.setDrawer(null);
+        emitStateGame(socket);
+        broadcastStateGame(socket);
+        socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+        socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+    });
 
     connection(socket);
     chat(socket);

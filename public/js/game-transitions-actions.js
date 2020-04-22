@@ -13,15 +13,17 @@ const gameTransitions = function(socket){
         }
     })
 
-    // socket.on('game-start', function(data){
-    //     sessionInitialization(socket, data);
-    // })
-
-    // socket.on('session-start', function(data){
-    //     sessionStart(socket, data);
-    // })
-
-    // socket.on('session-end', function(data){
-    //     sessionEnd(socket, data);
-    // })
+    socket.on('state-game', function (data) {
+        if(!data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded){
+            waitingRoom();
+        } else if (data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
+            sessionInitialization(socket, data);
+        } else if (data.hasGameStarted && data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
+            sessionStart(socket, data);
+        } else if (data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && !data.hasGameEnded) {
+            sessionEnd(socket, data);
+        } else if(data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && data.hasGameEnded) {
+            gameEnd(socket, data);
+        }
+    })
 }

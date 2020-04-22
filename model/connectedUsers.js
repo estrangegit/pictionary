@@ -57,6 +57,11 @@ let connectedUsers = {
             user.hasGuessed = hasGuessed;
         })
     },
+    initScores: (score) => {
+        connectedUsers.users.forEach(user => {
+            user.score = score;
+        })
+    },
     getRandomUserWhoHasNotDrawn: () => {
         let filteredList = connectedUsers.users.filter(user => !user.hasDrawn);
         if(filteredList.length > 0)
