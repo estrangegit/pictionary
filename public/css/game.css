@@ -1,6 +1,6 @@
 .jumbotron {
    padding-top: 10px;
-   padding-bottom: 10px; 
+   padding-bottom: 10px;
 }
 
 #participantList {
@@ -32,7 +32,7 @@ span.pseudo-user {
     top: 0;
     cursor: crosshair;
   }
-    
+
 div#colors div.color, div#colors div.clean-whiteboard {
     display: inline-block;
     width: 5%;
@@ -61,7 +61,7 @@ div#colors div.color.yellow { background-color: yellow; }
 }
 
 
-#chatArea ul.proposals {
+#chatArea ul#proposals {
     list-style: none;
     word-wrap: break-word;
     margin: 0px;
@@ -70,7 +70,7 @@ div#colors div.color.yellow { background-color: yellow; }
     overflow-y: auto;
 }
 
-#chatArea ul.proposals li span.pseudo {
+#chatArea ul#proposals li span.pseudo {
     text-decoration: underline;
 }
 

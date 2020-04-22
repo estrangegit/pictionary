@@ -1,11 +1,6 @@
 const gameConnection = function (socket) {
-    $gameOn = $('#game-on');
-    $transitionPanel = $('#transition-panel');
-    $transitionMessage = $('#transition-message');
-    $transitionButton = $('#transition-button');
-
-    $participantList = $('#participantList');
-    $scoreList = $('#scoreList');
+    let $participantList = $('#participantList');
+    let $scoreList = $('#scoreList');
 
     let pseudo = $participantList.data('pseudo');
 
@@ -34,7 +29,7 @@ const gameConnection = function (socket) {
 
     socket.on('state-game', function (data) {
         if(!data.hasGameStarted && !data.hasSessionStarted){
-            waitingRoomInitilisation();
+            waitingRoom();
         } else if (data.hasGameStarted && !data.hasSessionStarted) {
             sessionInitialization(socket, data);
         } else if (data.hasGameStarted && data.hasSessionStarted) {

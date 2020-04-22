@@ -1,8 +1,8 @@
-const waitingRoomInitilisation = function() {
-    $gameOn = $("#game-on");
-    $transitionPanel = $("#transition-panel");
-    $transitionMessage = $('#transition-message');
-    $transitionButton = $('#transition-button');
+const waitingRoom = function() {
+    let $gameOn = $("#game-on");
+    let $transitionPanel = $("#transition-panel");
+    let $transitionMessage = $('#transition-message');
+    let $transitionButton = $('#transition-button');
 
     $gameOn.hide();
     $transitionPanel.show();
@@ -13,10 +13,11 @@ const waitingRoomInitilisation = function() {
 }
 
 const sessionInitialization = function (socket, data) {
-    $gameOn = $("#game-on");
-    $transitionPanel = $("#transition-panel");
-    $transitionMessage = $('#transition-message');
-    $transitionButton = $('#transition-button');
+    let $gameOn = $("#game-on");
+    let $transitionPanel = $("#transition-panel");
+    let $transitionMessage = $('#transition-message');
+    let $transitionButton = $('#transition-button');
+
     $transitionButton.text(BUTTON_TEXT_DESSINER_MOT);
     $transitionButton.show();
 
@@ -34,21 +35,20 @@ const sessionInitialization = function (socket, data) {
 };
 
 const sessionStart = function (socket, data) {
-    $gameOn = $("#game-on");
-    $transitionPanel = $("#transition-panel");
-    $transitionButton = $('#transition-button');
-    $color = $('.color');
-    $cleanWhiteboard = $('.clean-whiteboard');
-    $chatProposal = $('#chatProposal');
+    let $gameOn = $("#game-on");
+    let $transitionPanel = $("#transition-panel");
+    let $color = $('.color');
+    let $cleanWhiteboard = $('.clean-whiteboard');
+    let $inputProposal = $('.inputProposal');
 
     $transitionPanel.hide();
     $gameOn.show();
-    $chatProposal.show();
     $color.show();
     $cleanWhiteboard.show();
+    $inputProposal.show();
 
     if(socket.id == data.drawer.id){
-        $chatProposal.hide();
+        $inputProposal.hide();
         let colorWidth = $(".color").width();
         $(".color").css({ height: colorWidth + "px" });
         $(".clean-whiteboard").css({ height: colorWidth + "px" });
@@ -57,3 +57,21 @@ const sessionStart = function (socket, data) {
         $cleanWhiteboard.hide();
     }
 };
+
+const sessionEnd = function(socket, wordToGuess) {
+    let $gameOn = $("#game-on");
+    let $transitionPanel = $("#transition-panel");
+    let $transitionMessage = $('#transition-message');
+    let $transitionButton = $('#transition-button');
+    let $proposals = $('#proposals');
+
+    $gameOn.hide();
+    $transitionPanel.show();
+    $transitionButton.show();
+    $transitionButton.text(BUTTON_TEXT_POURSUIVRE_JEU);
+    $transitionMessage.show();
+    $transitionMessage.text(MESSAGE_TEXT_MOT_A_DEVINER + wordToGuess);
+    $proposals.empty();
+
+    socket.emit('clean-whiteboard');
+}

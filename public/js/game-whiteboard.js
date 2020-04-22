@@ -25,7 +25,6 @@ const gameWhiteboard = function (socket) {
     $canvas.on('touchmove', throttle(onMouseMove, 10));
 
     $trash.on('click', function(){
-        context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         socket.emit('clean-whiteboard');
     });
 

@@ -1,11 +1,13 @@
 const gameSession = function(socket){
-    $transitionButton = $('#transition-button');
+    let $transitionButton = $('#transition-button');
 
     $transitionButton.click(() => {
         if($transitionButton.text() == BUTTON_TEXT_LANCER_PARTIE) {
             socket.emit('game-start');
         } else if($transitionButton.text() == BUTTON_TEXT_DESSINER_MOT) {
             socket.emit('session-start');
+        } else if($transitionButton.text() == BUTTON_TEXT_POURSUIVRE_JEU) {
+            socket.emit('game-start');
         }
     })
 
@@ -15,5 +17,9 @@ const gameSession = function(socket){
 
     socket.on('session-start', function(data){
         sessionStart(socket, data);
+    })
+
+    socket.on('session-end', function(wordToGuess){
+        sessionEnd(socket, wordToGuess);
     })
 }

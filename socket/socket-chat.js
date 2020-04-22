@@ -20,20 +20,21 @@ chat = (socket) => {
 
             nbConnectedUsersWhoHasNotGuessed = connectedUsers.getNbConnectedUsersWhoHasNotGuessed();
 
-            if(nbConnectedUsersWhoHasNotGuessed > 0) {
-                socket.emit(socketConstants.NEW_PROPOSAL, {
-                    pseudo: pseudo,
-                    proposal: 'Bravo!',
-                    hasGuessed: true
-                });
-                socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {
-                    pseudo: pseudo,
-                    proposal: 'Mot trouvé!',
-                    hasGuessed: false
-                });
-            } else {
+            socket.emit(socketConstants.NEW_PROPOSAL, {
+                pseudo: pseudo,
+                proposal: 'Bravo!',
+                hasGuessed: true
+            });
+            socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {
+                pseudo: pseudo,
+                proposal: 'Mot trouvé!',
+                hasGuessed: false
+            });
+
+            if(nbConnectedUsersWhoHasNotGuessed == 0) {
                 connectedUsers.initHasGuessed(false);
                 socket.emit(socketConstants.SESSION_END, gameData.wordToGuess);
+                socket.broadcast.emit(socketConstants.SESSION_END, gameData.wordToGuess);
             }
         } else {
             socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {

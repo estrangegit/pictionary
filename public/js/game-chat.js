@@ -5,7 +5,8 @@ const gameChat = function (socket) {
         '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
     ];
 
-    let $proposals = $('.proposals');
+    let $proposals = $('#proposals');
+    let $participantList = $('#participantList');
     let $inputProposal = $('.inputProposal');
     let $window = $(window);
 
