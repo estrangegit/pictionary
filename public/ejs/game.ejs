@@ -29,32 +29,18 @@
                     </div>
                 </div>
             </div>
-            <div id="game-waiting">
+            <div id="transition-panel">
                 <div class="row">
                     <div class="jumbotron col-sm-12 text-center">
-                        <h4 class="font-weight-light">
-                            En attente des participants
+                        <h4 id="transition-message" class="font-weight-light">
+                            ...
                         </h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <div id="game-launcher" class="btn btn-primary">
-                            Lancer le jeu
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="game-show-word">
-                <div class="row">
-                    <div class="jumbotron col-sm-12 text-center">
-                        <h4 id="message-role" class="font-weight-light"></h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <div id="session-launcher" class="btn btn-primary">
-                            Dessiner le mot
+                        <div id="transition-button" class="btn btn-primary">
+                            ...
                         </div>
                     </div>
                 </div>
@@ -95,6 +81,7 @@
         </div>
         <%- include('script-section') %>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/public/js/game-transitions-constants.js"></script>
         <script src="/public/js/game-transitions.js"></script>
         <script src="/public/js/game-session.js"></script>
         <script src="/public/js/game-chat.js"></script>

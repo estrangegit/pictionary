@@ -1,6 +1,8 @@
 const gameConnection = function (socket) {
     $gameOn = $('#game-on');
-    $gameWaiting = $('#game-waiting');
+    $transitionPanel = $('#transition-panel');
+    $transitionMessage = $('#transition-message');
+    $transitionButton = $('#transition-button');
 
     $participantList = $('#participantList');
     $scoreList = $('#scoreList');
@@ -28,6 +30,10 @@ const gameConnection = function (socket) {
 
         $participantList.html('<span>Liste des participants</span></br>' + htmlParticipantList.join(', '));
         $scoreList.html('<span>Score des joueurs</span></br>' + htmlScoreList.join(', '));
+
+        $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
+        $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
+        $transitionPanel.show();
     })
 
     socket.on('state-game', function (data) {

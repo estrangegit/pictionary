@@ -1,14 +1,16 @@
 const sessionStart = function (socket, data) {
     $gameOn = $("#game-on");
-    $gameWaiting = $("#game-waiting");
-    $gameShowWord = $("#game-show-word");
+    $transitionPanel = $("#transition-panel");
+    $transitionButton = $('#transition-button');
     $color = $('.color');
     $cleanWhiteboard = $('.clean-whiteboard');
     $chatProposal = $('#chatProposal');
 
-    $gameWaiting.hide();
-    $gameShowWord.hide();
+    $transitionPanel.hide();
     $gameOn.show();
+    $chatProposal.show();
+    $color.show();
+    $cleanWhiteboard.show();
 
     if(socket.id == data.drawer.id){
         $chatProposal.hide();
@@ -19,26 +21,25 @@ const sessionStart = function (socket, data) {
         $color.hide();
         $cleanWhiteboard.hide();
     }
-
 };
 
 const sessionInitialization = function (socket, data) {
     $gameOn = $("#game-on");
-    $gameWaiting = $("#game-waiting");
-    $gameShowWord = $("#game-show-word");
-    $messageRole = $('#message-role');
-    $sessionLauncher = $('#session-launcher');
+    $transitionPanel = $("#transition-panel");
+    $transitionMessage = $('#transition-message');
+    $transitionButton = $('#transition-button');
+    $transitionButton.text('Dessiner le mot');
+    $transitionButton.show();
 
     let message = ''
     if(socket.id == data.drawer.id) {
-        message = 'Vous devez faire deviner le mot ' + data.wordToGuess;
+        message = MESSAGE_TEXT_SESSION_TRANSITION_DRAWER + data.wordToGuess;
     } else {
-        message = data.drawer.pseudo + ' est en train de lire le mot à dessiner';
-        $sessionLauncher.hide();
+        message = data.drawer.pseudo + MESSAGE_TEXT_SESSION_TRANSITION_GUESSER;
+        $transitionButton.hide();
     }
-    $messageRole.text(message);
+    $transitionMessage.text(message);
 
     $gameOn.hide();
-    $gameWaiting.hide();
-    $gameShowWord.show();
+    $transitionPanel.show();
 };
