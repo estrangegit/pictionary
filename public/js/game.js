@@ -7,7 +7,7 @@ $(function(){
     const socket = io.connect('http://localhost:8080');
 
     gameConnection(socket);
-    gameSession(socket);
+    gameTransitions(socket);
     gameChat(socket);
     gameWhiteboard(socket);
 })

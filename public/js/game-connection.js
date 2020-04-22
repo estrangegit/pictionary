@@ -28,14 +28,16 @@ const gameConnection = function (socket) {
     })
 
     socket.on('state-game', function (data) {
-        if(!data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded){
+        if(!data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded){
             waitingRoom();
-        } else if (data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded) {
+        } else if (data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
             sessionInitialization(socket, data);
-        } else if (data.hasGameStarted && data.hasSessionStarted && !data.hasSessionEnded) {
+        } else if (data.hasGameStarted && data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
             sessionStart(socket, data);
-        } else if (data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded) {
+        } else if (data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && !data.hasGameEnded) {
             sessionEnd(socket, data);
+        } else if(data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && data.hasGameEnded) {
+            gameEnd(socket, data);
         }
     })
 };

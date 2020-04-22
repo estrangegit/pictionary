@@ -1,4 +1,4 @@
-const gameSession = function(socket){
+const gameTransitions = function(socket){
     let $transitionButton = $('#transition-button');
 
     $transitionButton.click(() => {
@@ -8,18 +8,20 @@ const gameSession = function(socket){
             socket.emit('session-start');
         } else if($transitionButton.text() == BUTTON_TEXT_POURSUIVRE_JEU) {
             socket.emit('game-start');
+        } else if($transitionButton.text() == BUTTON_TEXT_REJOUER) {
+            socket.emit('game-init');
         }
     })
 
-    socket.on('game-start', function(data){
-        sessionInitialization(socket, data);
-    })
+    // socket.on('game-start', function(data){
+    //     sessionInitialization(socket, data);
+    // })
 
-    socket.on('session-start', function(data){
-        sessionStart(socket, data);
-    })
+    // socket.on('session-start', function(data){
+    //     sessionStart(socket, data);
+    // })
 
-    socket.on('session-end', function(data){
-        sessionEnd(socket, data);
-    })
+    // socket.on('session-end', function(data){
+    //     sessionEnd(socket, data);
+    // })
 }

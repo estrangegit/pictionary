@@ -59,7 +59,10 @@ let connectedUsers = {
     },
     getRandomUserWhoHasNotDrawn: () => {
         let filteredList = connectedUsers.users.filter(user => !user.hasDrawn);
-        return filteredList[Math.floor(Math.random() * filteredList.length)];
+        if(filteredList.length > 0)
+            return filteredList[Math.floor(Math.random() * filteredList.length)];
+        else
+            return null;
     }
 }
 

@@ -1,6 +1,6 @@
 const socketConstants = require('../model/socketConstants');
 
-whiteboard = (socket) => {
+let whiteboard = (socket) => {
     socket.on(socketConstants.DRAWING, (data) => socket.broadcast.emit(socketConstants.DRAWING, data));
 
     socket.on(socketConstants.CLEAN_WHITEBOARD, () => {

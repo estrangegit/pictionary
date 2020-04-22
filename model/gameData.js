@@ -20,30 +20,43 @@ let gameData = {
     gameStarted : false,
     sessionStarted: false,
     sessionEnded: false,
+    gameEnded: false,
     wordToGuess: '',
     drawer: null,
+
     startGame: () => {
         gameData.gameStarted = true;
         gameData.sessionStarted = false;
         gameData.sessionEnded = false;
-    },
-
-    stopGame: () => {
-        gameData.gameStarted = false;
-        gameData.sessionStarted = false;
-        gameData.sessionEnded = false;
+        gameData.gameEnded = false;
     },
 
     startSession: () => {
         gameData.gameStarted = true;
         gameData.sessionStarted = true;
         gameData.sessionEnded = false;
+        gameData.gameEnded = false;
     },
 
-    stopSession: () => {
+    endSession: () => {
         gameData.gameStarted = true;
         gameData.sessionStarted = true;
         gameData.sessionEnded = true;
+        gameData.gameEnded = false;
+    },
+
+    endGame: () => {
+        gameData.gameStarted = true;
+        gameData.sessionStarted = true;
+        gameData.sessionEnded = true;
+        gameData.gameEnded = true;
+    },
+
+    stopGame: () => {
+        gameData.gameStarted = false;
+        gameData.sessionStarted = false;
+        gameData.sessionEnded = false;
+        gameData.gameEnded = false;
     },
 
     hasGameStarted: () => {
@@ -56,6 +69,10 @@ let gameData = {
 
     hasSessionEnded: () => {
         return gameData.sessionEnded;
+    },
+
+    hasGameEnded: () => {
+        return gameData.gameEnded;
     },
 
     getWordToGuess: () => {

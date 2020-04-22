@@ -75,3 +75,23 @@ const sessionEnd = function(socket, data) {
 
     socket.emit('clean-whiteboard');
 }
+
+const gameEnd = function(socket, data) {
+    let $gameOn = $("#game-on");
+    let $transitionPanel = $("#transition-panel");
+    let $transitionMessage = $('#transition-message');
+    let $transitionButton = $('#transition-button');
+    let $proposals = $('#proposals');
+
+    let scoreString = data.scores.map(pseudoScore => pseudoScore.pseudo + ' - ' + pseudoScore.score + ' points').join(', ');
+
+    $transitionButton.text(BUTTON_TEXT_REJOUER);
+    $transitionMessage.text(MESSAGE_TEXT_SCORE + scoreString);
+    $gameOn.hide();
+    $transitionPanel.show();
+    $transitionButton.show();
+    $transitionMessage.show();
+    $proposals.empty();
+
+    socket.emit('clean-whiteboard');
+}
