@@ -7,7 +7,7 @@ connection = (socket) => {
         connectedUsers.push({ pseudo: pseudo, id: socket.id, hasDrawn: false, hasGuessed: false, score: 0 });
         socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
-        socket.emit(socketConstants.STATE_GAME, { hasGameStarted: gameData.hasGameStarted(), hasSessionStarted: gameData.hasSessionStarted(), drawer: gameData.getDrawer() });
+        socket.emit(socketConstants.STATE_GAME, { hasGameStarted: gameData.hasGameStarted(), hasSessionStarted: gameData.hasSessionStarted(), hasSessionEnded: gameData.hasSessionEnded(), drawer: gameData.getDrawer(), wordToGuess: gameData.wordToGuess });
     });
 
     socket.on(socketConstants.DISCONNECT, () => {
@@ -17,7 +17,6 @@ connection = (socket) => {
 
         if (connectedUsers.getPseudoAndScoreList().length == 0) {
             gameData.stopGame();
-            gameData.stopSession();
         }
     });
 };

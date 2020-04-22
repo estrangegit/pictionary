@@ -33,8 +33,9 @@ chat = (socket) => {
 
             if(nbConnectedUsersWhoHasNotGuessed == 0) {
                 connectedUsers.initHasGuessed(false);
-                socket.emit(socketConstants.SESSION_END, gameData.wordToGuess);
-                socket.broadcast.emit(socketConstants.SESSION_END, gameData.wordToGuess);
+                gameData.stopSession();
+                socket.emit(socketConstants.SESSION_END, {wordToGuess: gameData.wordToGuess});
+                socket.broadcast.emit(socketConstants.SESSION_END, {wordToGuess: gameData.wordToGuess});
             }
         } else {
             socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {

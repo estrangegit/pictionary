@@ -19,7 +19,7 @@ const gameSession = function(socket){
         sessionStart(socket, data);
     })
 
-    socket.on('session-end', function(wordToGuess){
-        sessionEnd(socket, wordToGuess);
+    socket.on('session-end', function(data){
+        sessionEnd(socket, data);
     })
 }

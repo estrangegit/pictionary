@@ -4,12 +4,12 @@ const waitingRoom = function() {
     let $transitionMessage = $('#transition-message');
     let $transitionButton = $('#transition-button');
 
+    $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
+    $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
     $gameOn.hide();
     $transitionPanel.show();
     $transitionButton.show();
-    $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
     $transitionMessage.show();
-    $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
 }
 
 const sessionInitialization = function (socket, data) {
@@ -58,19 +58,19 @@ const sessionStart = function (socket, data) {
     }
 };
 
-const sessionEnd = function(socket, wordToGuess) {
+const sessionEnd = function(socket, data) {
     let $gameOn = $("#game-on");
     let $transitionPanel = $("#transition-panel");
     let $transitionMessage = $('#transition-message');
     let $transitionButton = $('#transition-button');
     let $proposals = $('#proposals');
 
+    $transitionButton.text(BUTTON_TEXT_POURSUIVRE_JEU);
+    $transitionMessage.text(MESSAGE_TEXT_MOT_A_DEVINER + data.wordToGuess);
     $gameOn.hide();
     $transitionPanel.show();
     $transitionButton.show();
-    $transitionButton.text(BUTTON_TEXT_POURSUIVRE_JEU);
     $transitionMessage.show();
-    $transitionMessage.text(MESSAGE_TEXT_MOT_A_DEVINER + wordToGuess);
     $proposals.empty();
 
     socket.emit('clean-whiteboard');

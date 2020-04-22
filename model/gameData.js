@@ -19,30 +19,43 @@ const accentFold = function(inStr) {
 let gameData = {
     gameStarted : false,
     sessionStarted: false,
+    sessionEnded: false,
     wordToGuess: '',
     drawer: null,
     startGame: () => {
         gameData.gameStarted = true;
+        gameData.sessionStarted = false;
+        gameData.sessionEnded = false;
     },
 
     stopGame: () => {
         gameData.gameStarted = false;
+        gameData.sessionStarted = false;
+        gameData.sessionEnded = false;
+    },
+
+    startSession: () => {
+        gameData.gameStarted = true;
+        gameData.sessionStarted = true;
+        gameData.sessionEnded = false;
+    },
+
+    stopSession: () => {
+        gameData.gameStarted = true;
+        gameData.sessionStarted = true;
+        gameData.sessionEnded = true;
     },
 
     hasGameStarted: () => {
         return gameData.gameStarted;
     },
 
-    startSession: () => {
-        gameData.sessionStarted = true;
-    },
-
-    stopSession: () => {
-        gameData.sessionStarted = false;
-    },
-
     hasSessionStarted: () => {
         return gameData.sessionStarted;
+    },
+
+    hasSessionEnded: () => {
+        return gameData.sessionEnded;
     },
 
     getWordToGuess: () => {
