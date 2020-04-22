@@ -14,6 +14,10 @@ let connectedUsers = {
     getIdListWhoHasNotDrawn : () => {
         return connectedUsers.users.filter(user => user.hasDrawn == false).map(user => user.id);
     },
+    getNbConnectedUsersWhoHasNotGuessed: () => {
+        let userList = connectedUsers.users.filter(user => !user.hasGuessed);
+        return userList.length - 1;
+    },
     getPseudoById: (id) => {
         let user = connectedUsers.users.find(user => user.id == id);
         return user? user.pseudo : null;
@@ -34,6 +38,23 @@ let connectedUsers = {
             if(user.id == id){
                 user.hasDrawn = hasDrawn;
             }
+        })
+    },
+    setHasGuessedById: (id, hasGuessed) => {
+        connectedUsers.users.forEach(user => {
+            if(user.id == id){
+                user.hasGuessed = hasGuessed;
+            }
+        })
+    },
+    initHasDrawn: (hasDrawn) => {
+        connectedUsers.users.forEach(user => {
+            user.hasDrawn = hasDrawn;
+        })
+    },
+    initHasGuessedBy: (hasGuessed) => {
+        connectedUsers.users.forEach(user => {
+            user.hasGuessed = hasGuessed;
         })
     },
     getRandomUserWhoHasNotDrawn: () => {

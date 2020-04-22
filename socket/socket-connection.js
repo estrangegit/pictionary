@@ -4,7 +4,7 @@ const socketConstants = require("../model/socketConstants");
 
 connection = (socket) => {
     socket.on(socketConstants.NEW_USER, (pseudo) => {
-        connectedUsers.push({ pseudo: pseudo, id: socket.id, hasDrawn: false, score: 0 });
+        connectedUsers.push({ pseudo: pseudo, id: socket.id, hasDrawn: false, hasGuessed: false, score: 0 });
         socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         socket.emit(socketConstants.STATE_GAME, { hasGameStarted: gameData.hasGameStarted(), hasSessionStarted: gameData.hasSessionStarted(), drawer: gameData.getDrawer() });

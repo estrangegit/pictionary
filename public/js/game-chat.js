@@ -61,5 +61,8 @@ const gameChat = function (socket) {
 
     socket.on('new-proposal', (data) => {
         addChatProposal(data);
+        if(data.hasGuessed) {
+            $inputProposal.hide();
+        }
     });
 };
