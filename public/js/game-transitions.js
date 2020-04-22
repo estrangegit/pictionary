@@ -1,3 +1,38 @@
+const waitingRoomInitilisation = function() {
+    $gameOn = $("#game-on");
+    $transitionPanel = $("#transition-panel");
+    $transitionMessage = $('#transition-message');
+    $transitionButton = $('#transition-button');
+
+    $gameOn.hide();
+    $transitionPanel.show();
+    $transitionButton.show();
+    $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
+    $transitionMessage.show();
+    $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
+}
+
+const sessionInitialization = function (socket, data) {
+    $gameOn = $("#game-on");
+    $transitionPanel = $("#transition-panel");
+    $transitionMessage = $('#transition-message');
+    $transitionButton = $('#transition-button');
+    $transitionButton.text(BUTTON_TEXT_DESSINER_MOT);
+    $transitionButton.show();
+
+    let message = ''
+    if(socket.id == data.drawer.id) {
+        message = MESSAGE_TEXT_SESSION_TRANSITION_DRAWER + data.wordToGuess;
+    } else {
+        message = data.drawer.pseudo + MESSAGE_TEXT_SESSION_TRANSITION_GUESSER;
+        $transitionButton.hide();
+    }
+    $transitionMessage.text(message);
+
+    $gameOn.hide();
+    $transitionPanel.show();
+};
+
 const sessionStart = function (socket, data) {
     $gameOn = $("#game-on");
     $transitionPanel = $("#transition-panel");
@@ -21,25 +56,4 @@ const sessionStart = function (socket, data) {
         $color.hide();
         $cleanWhiteboard.hide();
     }
-};
-
-const sessionInitialization = function (socket, data) {
-    $gameOn = $("#game-on");
-    $transitionPanel = $("#transition-panel");
-    $transitionMessage = $('#transition-message');
-    $transitionButton = $('#transition-button');
-    $transitionButton.text('Dessiner le mot');
-    $transitionButton.show();
-
-    let message = ''
-    if(socket.id == data.drawer.id) {
-        message = MESSAGE_TEXT_SESSION_TRANSITION_DRAWER + data.wordToGuess;
-    } else {
-        message = data.drawer.pseudo + MESSAGE_TEXT_SESSION_TRANSITION_GUESSER;
-        $transitionButton.hide();
-    }
-    $transitionMessage.text(message);
-
-    $gameOn.hide();
-    $transitionPanel.show();
 };

@@ -30,14 +30,12 @@ const gameConnection = function (socket) {
 
         $participantList.html('<span>Liste des participants</span></br>' + htmlParticipantList.join(', '));
         $scoreList.html('<span>Score des joueurs</span></br>' + htmlScoreList.join(', '));
-
-        $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
-        $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
-        $transitionPanel.show();
     })
 
     socket.on('state-game', function (data) {
-        if (data.hasGameStarted && !data.hasSessionStarted) {
+        if(!data.hasGameStarted && !data.hasSessionStarted){
+            waitingRoomInitilisation();
+        } else if (data.hasGameStarted && !data.hasSessionStarted) {
             sessionInitialization(socket, data);
         } else if (data.hasGameStarted && data.hasSessionStarted) {
             sessionStart(socket, data);
