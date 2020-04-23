@@ -78,6 +78,18 @@ div#colors div.color.yellow { background-color: yellow; }
     margin-bottom: 20px;
 }
 
+#drawArea, #chatArea, #colors, #chatProposal {
+    display: inline-block;
+}
+
+#drawArea, #colors {
+    width: 75%;
+}
+
+#chatArea, #chatProposal {
+    width: 25%;
+}
+
 @media only screen and (max-width: 1000px) {
     .inputProposal::-webkit-input-placeholder { /* WebKit browsers */
         color: transparent;
