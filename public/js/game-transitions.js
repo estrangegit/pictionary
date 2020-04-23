@@ -48,7 +48,7 @@ const sessionInitialization = function (socket, data) {
     $transitionPanel.show();
 };
 
-const sessionStart = function (socket, data) {
+const drawStart = function (socket, data) {
     let $gameOn = $("#game-on");
     let $transitionPanel = $("#transition-panel");
     let $color = $('.color');
@@ -73,7 +73,7 @@ const sessionStart = function (socket, data) {
     }
 };
 
-const sessionEnd = function(socket, data) {
+const drawEnd = function(socket, data) {
     let $gameOn = $("#game-on");
     let $transitionPanel = $("#transition-panel");
     let $transitionMessage = $('#transition-message');

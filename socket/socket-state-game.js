@@ -3,9 +3,9 @@ const connectedUsers = require("../model/connectedUsers");
 const gameData = require("../model/gameData");
 
 const emitStateGame = (socket) => {
-    socket.emit(socketConstants.socketEventConstants.STATE_GAME, { hasGameStarted: gameData.hasGameStarted(),
-                                                hasSessionStarted: gameData.hasSessionStarted(),
-                                                hasSessionEnded: gameData.hasSessionEnded(),
+    socket.emit(socketConstants.socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
+                                                hasDrawStarted: gameData.hasDrawStarted(),
+                                                hasDrawEnded: gameData.hasDrawEnded(),
                                                 hasGameEnded: gameData.hasGameEnded(),
                                                 scores: connectedUsers.getPseudoAndScoreList(),
                                                 drawer: gameData.getDrawer(),
@@ -14,9 +14,9 @@ const emitStateGame = (socket) => {
 }
 
 const broadcastStateGame = (socket) => {
-    socket.broadcast.emit(socketConstants.socketEventConstants.STATE_GAME, { hasGameStarted: gameData.hasGameStarted(),
-                                                hasSessionStarted: gameData.hasSessionStarted(),
-                                                hasSessionEnded: gameData.hasSessionEnded(),
+    socket.broadcast.emit(socketConstants.socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
+                                                hasDrawStarted: gameData.hasDrawStarted(),
+                                                hasDrawEnded: gameData.hasDrawEnded(),
                                                 hasGameEnded: gameData.hasGameEnded(),
                                                 scores: connectedUsers.getPseudoAndScoreList(),
                                                 drawer: gameData.getDrawer(),

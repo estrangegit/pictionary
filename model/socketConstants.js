@@ -1,8 +1,8 @@
 const socketEventConstants = {
     /* socket-game constants */
-    GAME_START: 'game-start',
-    SESSION_START: 'session-start',
-    GAME_INIT: 'game-init',
+    START_SESSION: 'start-session',
+    START_DRAW: 'start-draw',
+    GAME_INIT: 'init-game',
     /* socket-connection constants */
     NEW_USER: 'new-user',
     PARTICIPANT_LIST: 'participant-list',
@@ -10,7 +10,6 @@ const socketEventConstants = {
     DISCONNECT: 'disconnect',
     /* socket-chat constants */
     NEW_PROPOSAL:'new-proposal',
-    SESSION_END:'session-end',
     /* socket-whiteboard constants */
     DRAWING: 'drawing',
     CLEAN_WHITEBOARD: 'clean-whiteboard',

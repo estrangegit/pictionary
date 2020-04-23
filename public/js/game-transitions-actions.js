@@ -3,26 +3,26 @@ const gameTransitions = function(socket){
 
     $transitionButton.click(() => {
         if($transitionButton.text() == BUTTON_TEXT_LANCER_PARTIE) {
-            socket.emit('game-start');
+            socket.emit('start-session');
         } else if($transitionButton.text() == BUTTON_TEXT_DESSINER_MOT) {
-            socket.emit('session-start');
+            socket.emit('start-draw');
         } else if($transitionButton.text() == BUTTON_TEXT_POURSUIVRE_JEU) {
-            socket.emit('game-start');
+            socket.emit('start-session');
         } else if($transitionButton.text() == BUTTON_TEXT_REJOUER) {
-            socket.emit('game-init');
+            socket.emit('init-game');
         }
     })
 
     socket.on('state-game', function (data) {
-        if(!data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded){
+        if(!data.hasSessionStarted && !data.hasDrawStarted && !data.hasDrawEnded && !data.hasGameEnded){
             waitingRoom(socket, data);
-        } else if (data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
+        } else if (data.hasSessionStarted && !data.hasDrawStarted && !data.hasDrawEnded && !data.hasGameEnded) {
             sessionInitialization(socket, data);
-        } else if (data.hasGameStarted && data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
-            sessionStart(socket, data);
-        } else if (data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && !data.hasGameEnded) {
-            sessionEnd(socket, data);
-        } else if(data.hasGameStarted && data.hasSessionStarted && data.hasSessionEnded && data.hasGameEnded) {
+        } else if (data.hasSessionStarted && data.hasDrawStarted && !data.hasDrawEnded && !data.hasGameEnded) {
+            drawStart(socket, data);
+        } else if (data.hasSessionStarted && data.hasDrawStarted && data.hasDrawEnded && !data.hasGameEnded) {
+            drawEnd(socket, data);
+        } else if(data.hasSessionStarted && data.hasDrawStarted && data.hasDrawEnded && data.hasGameEnded) {
             gameEnd(socket, data);
         }
     })

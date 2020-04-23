@@ -17,70 +17,70 @@ const accentFold = function(inStr) {
 }
 
 let gameData = {
-    gameStarted : false,
-    sessionStarted: false,
-    sessionEnded: false,
+    sessionStarted : false,
+    drawStarted: false,
+    drawEnded: false,
     gameEnded: false,
     wordToGuess: '',
     drawer: null,
     errorMessage: null,
 
-    startGame: () => {
-        gameData.gameStarted = true;
-        gameData.sessionStarted = false;
-        gameData.sessionEnded = false;
-        gameData.gameEnded = false;
-        gameData.errorMessage = null;
-    },
-
     startSession: () => {
-        gameData.gameStarted = true;
         gameData.sessionStarted = true;
-        gameData.sessionEnded = false;
+        gameData.drawStarted = false;
+        gameData.drawEnded = false;
         gameData.gameEnded = false;
         gameData.errorMessage = null;
     },
 
-    endSession: () => {
-        gameData.gameStarted = true;
+    startDraw: () => {
         gameData.sessionStarted = true;
-        gameData.sessionEnded = true;
+        gameData.drawStarted = true;
+        gameData.drawEnded = false;
+        gameData.gameEnded = false;
+        gameData.errorMessage = null;
+    },
+
+    endDraw: () => {
+        gameData.sessionStarted = true;
+        gameData.drawStarted = true;
+        gameData.drawEnded = true;
         gameData.gameEnded = false;
     },
 
     endGame: () => {
-        gameData.gameStarted = true;
         gameData.sessionStarted = true;
-        gameData.sessionEnded = true;
+        gameData.drawStarted = true;
+        gameData.drawEnded = true;
         gameData.gameEnded = true;
     },
 
     initGame: () => {
-        gameData.gameStarted = false;
         gameData.sessionStarted = false;
-        gameData.sessionEnded = false;
+        gameData.drawStarted = false;
+        gameData.drawEnded = false;
         gameData.gameEnded = false;
         gameData.errorMessage = null;
     },
 
     isSessionRunning: () => {
-        return gameData.gameStarted && !gameData.gameEnded;
+        return gameData.sessionStarted && !gameData.gameEnded;
     },
 
     isGameEnded: () => {
-        return gameData.gameStarted && gameData.sessionStarted && gameData.sessionEnded && gameData.gameEnded;
-    },
-
-    hasGameStarted: () => {
-        return gameData.gameStarted;
+        return gameData.sessionStarted && gameData.drawStarted && gameData.drawEnded && gameData.gameEnded;
     },
 
     hasSessionStarted: () => {
         return gameData.sessionStarted;
     },
 
-    hasSessionEnded: () => {
-        return gameData.sessionEnded;
+    hasDrawStarted: () => {
+        return gameData.drawStarted;
+    },
+
+    hasDrawEnded: () => {
+        return gameData.drawEnded;
     },
 
     hasGameEnded: () => {

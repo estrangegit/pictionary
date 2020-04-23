@@ -1,7 +1,6 @@
 const connectedUsers = require('../model/connectedUsers')
 const socketConstants = require('../model/socketConstants');
 const gameData = require("../model/gameData");
-const stateGame = require('./socket-state-game');
 const gameTransitions = require('./socket-game-transitions');
 
 let chat = (socket) => {
@@ -34,7 +33,7 @@ let chat = (socket) => {
             });
 
             if(nbConnectedUsersWhoHasNotGuessed == 0) {
-                gameTransitions.sessionEnd(socket);
+                gameTransitions.endDraw(socket);
             }
         } else {
             socket.broadcast.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {

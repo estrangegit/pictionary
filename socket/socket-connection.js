@@ -23,11 +23,11 @@ let connection = (socket) => {
             gameData.initGame();
         } else if(!gameData.isGameEnded() && connectedUsers.getPseudoAndScoreList().length == 1) {
             gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
-            gameTransitions.gameEnd(socket)
+            gameTransitions.endGame(socket)
         } else {
             if(gameData.isSessionRunning() && gameData.getDrawer().id == socket.id){
                 gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
-                gameTransitions.sessionEnd(socket);
+                gameTransitions.endDraw(socket);
             }
         }
     });

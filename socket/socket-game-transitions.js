@@ -4,10 +4,9 @@ const wordList = require('../model/wordList');
 const connectedUsers = require('../model/connectedUsers');
 const stateGame = require('./socket-state-game');
 
-// Les joueurs commencent une phase de jeu (le mot est montré au dessinateur)
-const gameStart = (socket) => {
+const startSession = (socket) => {
     if(connectedUsers.getPseudoAndScoreList().length > 1) {
-        gameData.startGame();
+        gameData.startSession()
 
         let wordToGuess = wordList.getRandomWord();
         gameData.setWordToGuess(wordToGuess);
@@ -20,7 +19,7 @@ const gameStart = (socket) => {
             stateGame.emitStateGame(socket);
             stateGame.broadcastStateGame(socket);
         } else {
-            gameEnd(socket);
+            endGame(socket);
         }
     } else {
         gameData.setErrorMessage(socketConstants.socketErrorMessageConstants.INSUFFISIENT_PLAYER_NUMBER);
@@ -28,15 +27,26 @@ const gameStart = (socket) => {
     }
 };
 
-// La partie se termine (affichage des scores)
-const gameEnd = (socket) => {
+const startDraw = (socket) => {
+    gameData.startDraw();
+    stateGame.emitStateGame(socket);
+    stateGame.broadcastStateGame(socket);
+};
+
+const endDraw = (socket) => {
+    connectedUsers.initHasGuessed(false);
+    gameData.endDraw();
+    stateGame.emitStateGame(socket);
+    stateGame.broadcastStateGame(socket);
+};
+
+const endGame = (socket) => {
     gameData.endGame();
     stateGame.emitStateGame(socket);
     stateGame.broadcastStateGame(socket);
 }
 
-// Initialisation de la partie (affichage de la salle d'attente)
-const gameInit = (socket) => {
+const initGame = (socket) => {
     gameData.initGame();
     connectedUsers.initHasGuessed(false);
     connectedUsers.initHasDrawn(false);
@@ -49,19 +59,4 @@ const gameInit = (socket) => {
     socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 };
 
-// Début d'une phase de dessin - devinette
-const sessionStart = (socket) => {
-    gameData.startSession();
-    stateGame.emitStateGame(socket);
-    stateGame.broadcastStateGame(socket);
-};
-
-// Fin d'une phase de dessin - devinette (affichage du mot recherché)
-const sessionEnd = (socket) => {
-    connectedUsers.initHasGuessed(false);
-    gameData.endSession();
-    stateGame.emitStateGame(socket);
-    stateGame.broadcastStateGame(socket);
-};
-
-module.exports = {gameStart, gameEnd, gameInit, sessionStart, sessionEnd};
+module.exports = {startSession, startDraw, endDraw, endGame, initGame};
