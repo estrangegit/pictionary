@@ -4,7 +4,7 @@ const gameData = require("../model/gameData");
 const stateGame = require('./socket-state-game');
 
 let chat = (socket) => {
-    socket.on(socketConstants.NEW_PROPOSAL, (proposal) => {
+    socket.on(socketConstants.socketEventConstants.NEW_PROPOSAL, (proposal) => {
 
         let pseudo = connectedUsers.getPseudoById(socket.id);
 
@@ -16,17 +16,17 @@ let chat = (socket) => {
             connectedUsers.addScoreById(socket.id, 10 * nbConnectedUsersWhoHasNotGuessed);
             connectedUsers.setHasGuessedById(socket.id, true);
 
-            socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
-            socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+            socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+            socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 
             nbConnectedUsersWhoHasNotGuessed = connectedUsers.getNbConnectedUsersWhoHasNotGuessed();
 
-            socket.emit(socketConstants.NEW_PROPOSAL, {
+            socket.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: 'Bravo!',
                 hasGuessed: true
             });
-            socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {
+            socket.broadcast.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: 'Mot trouvé!',
                 hasGuessed: false
@@ -39,12 +39,12 @@ let chat = (socket) => {
                 stateGame.broadcastStateGame(socket);
             }
         } else {
-            socket.broadcast.emit(socketConstants.NEW_PROPOSAL, {
+            socket.broadcast.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: proposal,
                 hasGuessed: false
             });
-            socket.emit(socketConstants.NEW_PROPOSAL, {
+            socket.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: proposal,
                 hasGuessed: false

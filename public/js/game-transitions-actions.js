@@ -15,7 +15,7 @@ const gameTransitions = function(socket){
 
     socket.on('state-game', function (data) {
         if(!data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded){
-            waitingRoom();
+            waitingRoom(socket, data);
         } else if (data.hasGameStarted && !data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {
             sessionInitialization(socket, data);
         } else if (data.hasGameStarted && data.hasSessionStarted && !data.hasSessionEnded && !data.hasGameEnded) {

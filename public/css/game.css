@@ -90,6 +90,10 @@ div#colors div.color.yellow { background-color: yellow; }
     width: 25%;
 }
 
+#transition-error-message {
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 1000px) {
     .inputProposal::-webkit-input-placeholder { /* WebKit browsers */
         color: transparent;

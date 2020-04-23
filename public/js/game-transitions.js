@@ -1,9 +1,22 @@
-const waitingRoom = function() {
+const errorMessageManagement = function(data){
+    let $transitionErrorMessage = $('#transition-error-message');
+
+    if(data.errorMessage) {
+        $transitionErrorMessage.text(data.errorMessage);
+        $transitionErrorMessage.show();
+    } else {
+        $transitionErrorMessage.empty();
+        $transitionErrorMessage.hide();
+    }
+}
+
+const waitingRoom = function(socket, data) {
     let $gameOn = $("#game-on");
     let $transitionPanel = $("#transition-panel");
     let $transitionMessage = $('#transition-message');
     let $transitionButton = $('#transition-button');
 
+    errorMessageManagement(data);
     $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
     $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
     $gameOn.hide();
@@ -18,6 +31,7 @@ const sessionInitialization = function (socket, data) {
     let $transitionMessage = $('#transition-message');
     let $transitionButton = $('#transition-button');
 
+    errorMessageManagement(data);
     $transitionButton.text(BUTTON_TEXT_DESSINER_MOT);
     $transitionButton.show();
 
@@ -41,6 +55,7 @@ const sessionStart = function (socket, data) {
     let $cleanWhiteboard = $('.clean-whiteboard');
     let $inputProposal = $('.inputProposal');
 
+    errorMessageManagement(data);
     $transitionPanel.hide();
     $gameOn.show();
     $color.show();
@@ -65,6 +80,7 @@ const sessionEnd = function(socket, data) {
     let $transitionButton = $('#transition-button');
     let $proposals = $('#proposals');
 
+    errorMessageManagement(data);
     $transitionButton.text(BUTTON_TEXT_POURSUIVRE_JEU);
     $transitionMessage.text(MESSAGE_TEXT_MOT_A_DEVINER + data.wordToGuess);
     $gameOn.hide();
@@ -85,6 +101,7 @@ const gameEnd = function(socket, data) {
 
     let scoreString = data.scores.map(pseudoScore => pseudoScore.pseudo + ' - ' + pseudoScore.score + ' points').join(', ');
 
+    errorMessageManagement(data);
     $transitionButton.text(BUTTON_TEXT_REJOUER);
     $transitionMessage.text(MESSAGE_TEXT_SCORE + scoreString);
     $gameOn.hide();

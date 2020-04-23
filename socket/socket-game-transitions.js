@@ -5,22 +5,27 @@ const connectedUsers = require('../model/connectedUsers');
 const stateGame = require('./socket-state-game');
 
 const gameStart = (socket) => {
-    gameData.startGame();
+    if(connectedUsers.getPseudoAndScoreList().length > 1) {
+        gameData.startGame();
 
-    let wordToGuess = wordList.getRandomWord();
-    gameData.setWordToGuess(wordToGuess);
+        let wordToGuess = wordList.getRandomWord();
+        gameData.setWordToGuess(wordToGuess);
 
-    let drawer = connectedUsers.getRandomUserWhoHasNotDrawn();
+        let drawer = connectedUsers.getRandomUserWhoHasNotDrawn();
 
-    if(drawer){
-        gameData.setDrawer(drawer);
-        connectedUsers.setHasDrawnById(drawer.id, true);
-        stateGame.emitStateGame(socket);
-        stateGame.broadcastStateGame(socket);
+        if(drawer){
+            gameData.setDrawer(drawer);
+            connectedUsers.setHasDrawnById(drawer.id, true);
+            stateGame.emitStateGame(socket);
+            stateGame.broadcastStateGame(socket);
+        } else {
+            gameData.endGame();
+            stateGame.emitStateGame(socket);
+            stateGame.broadcastStateGame(socket);
+        }
     } else {
-        gameData.endGame();
+        gameData.setErrorMessage(socketConstants.socketErrorMessageConstants.INSUFFISIENT_PLAYER_NUMBER);
         stateGame.emitStateGame(socket);
-        stateGame.broadcastStateGame(socket);
     }
 }
 
@@ -39,8 +44,8 @@ const gameInit = (socket) => {
     gameData.setDrawer(null);
     stateGame.emitStateGame(socket);
     stateGame.broadcastStateGame(socket);
-    socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
-    socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+    socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+    socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 }
 
 module.exports = {gameStart, sessionStart, gameInit};

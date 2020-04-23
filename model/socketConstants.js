@@ -1,4 +1,4 @@
-let socketConstants = {
+const socketEventConstants = {
     /* socket-game constants */
     GAME_START: 'game-start',
     SESSION_START: 'session-start',
@@ -16,4 +16,8 @@ let socketConstants = {
     CLEAN_WHITEBOARD: 'clean-whiteboard',
 }
 
-module.exports = socketConstants;
+const socketErrorMessageConstants = {
+    INSUFFISIENT_PLAYER_NUMBER : 'Vous devez être au moins deux joueurs pour lancer une partie'
+}
+
+module.exports = { socketEventConstants, socketErrorMessageConstants };

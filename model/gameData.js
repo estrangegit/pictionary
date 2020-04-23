@@ -23,12 +23,14 @@ let gameData = {
     gameEnded: false,
     wordToGuess: '',
     drawer: null,
+    errorMessage: null,
 
     startGame: () => {
         gameData.gameStarted = true;
         gameData.sessionStarted = false;
         gameData.sessionEnded = false;
         gameData.gameEnded = false;
+        gameData.errorMessage = null;
     },
 
     startSession: () => {
@@ -36,6 +38,7 @@ let gameData = {
         gameData.sessionStarted = true;
         gameData.sessionEnded = false;
         gameData.gameEnded = false;
+        gameData.errorMessage = null;
     },
 
     endSession: () => {
@@ -43,6 +46,7 @@ let gameData = {
         gameData.sessionStarted = true;
         gameData.sessionEnded = true;
         gameData.gameEnded = false;
+        gameData.errorMessage = null;
     },
 
     endGame: () => {
@@ -50,6 +54,7 @@ let gameData = {
         gameData.sessionStarted = true;
         gameData.sessionEnded = true;
         gameData.gameEnded = true;
+        gameData.errorMessage = null;
     },
 
     stopGame: () => {
@@ -89,6 +94,14 @@ let gameData = {
 
     setDrawer: (user) => {
         gameData.drawer = user;
+    },
+
+    getErrorMessage: () => {
+        return gameData.errorMessage;
+    },
+
+    setErrorMessage: (errorMessage) => {
+        gameData.errorMessage = errorMessage;
     },
 
     isSameThanWordToGuess: (proposal) => {

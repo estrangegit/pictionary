@@ -5,15 +5,15 @@ const socketConstants = require('../model/socketConstants');
 const gameTransitions = require('./socket-game-transitions');
 
 let game = (socket) => {
-    socket.on(socketConstants.GAME_START, () => {
+    socket.on(socketConstants.socketEventConstants.GAME_START, () => {
         gameTransitions.gameStart(socket);
     });
 
-    socket.on(socketConstants.SESSION_START, () => {
+    socket.on(socketConstants.socketEventConstants.SESSION_START, () => {
         gameTransitions.sessionStart(socket);
     });
 
-    socket.on(socketConstants.GAME_INIT, () => {
+    socket.on(socketConstants.socketEventConstants.GAME_INIT, () => {
         gameTransitions.gameInit(socket);
     });
 
