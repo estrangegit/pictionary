@@ -2,8 +2,7 @@ const gameData = require('../model/gameData');
 const socketConstants = require('../model/socketConstants');
 const wordList = require('../model/wordList');
 const connectedUsers = require('../model/connectedUsers');
-const emitStateGame = require('./emit-state-game');
-const broadcastStateGame = require('./broadcast-state-game');
+const stateGame = require('./socket-state-game');
 
 const gameStart = (socket) => {
     gameData.startGame();
@@ -16,19 +15,19 @@ const gameStart = (socket) => {
     if(drawer){
         gameData.setDrawer(drawer);
         connectedUsers.setHasDrawnById(drawer.id, true);
-        emitStateGame(socket);
-        broadcastStateGame(socket);
+        stateGame.emitStateGame(socket);
+        stateGame.broadcastStateGame(socket);
     } else {
         gameData.endGame();
-        emitStateGame(socket);
-        broadcastStateGame(socket);
+        stateGame.emitStateGame(socket);
+        stateGame.broadcastStateGame(socket);
     }
 }
 
 const sessionStart = (socket) => {
     gameData.startSession();
-    emitStateGame(socket);
-    broadcastStateGame(socket);
+    stateGame.emitStateGame(socket);
+    stateGame.broadcastStateGame(socket);
 }
 
 const gameInit = (socket) => {
@@ -38,8 +37,8 @@ const gameInit = (socket) => {
     connectedUsers.initScores(0);
     gameData.setWordToGuess(null);
     gameData.setDrawer(null);
-    emitStateGame(socket);
-    broadcastStateGame(socket);
+    stateGame.emitStateGame(socket);
+    stateGame.broadcastStateGame(socket);
     socket.broadcast.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
     socket.emit(socketConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 }
