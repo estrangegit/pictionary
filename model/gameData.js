@@ -24,6 +24,8 @@ let gameData = {
     wordToGuess: '',
     drawer: null,
     errorMessage: null,
+    stepNumber: null,
+    sessionCount: 1,
 
     startSession: () => {
         gameData.sessionStarted = true;
@@ -31,6 +33,7 @@ let gameData = {
         gameData.drawEnded = false;
         gameData.gameEnded = false;
         gameData.errorMessage = null;
+        gameData.setNewStepNumber();
     },
 
     startDraw: () => {
@@ -39,6 +42,7 @@ let gameData = {
         gameData.drawEnded = false;
         gameData.gameEnded = false;
         gameData.errorMessage = null;
+        gameData.setNewStepNumber();
     },
 
     endDraw: () => {
@@ -46,6 +50,7 @@ let gameData = {
         gameData.drawStarted = true;
         gameData.drawEnded = true;
         gameData.gameEnded = false;
+        gameData.setNewStepNumber();
     },
 
     endGame: () => {
@@ -53,6 +58,7 @@ let gameData = {
         gameData.drawStarted = true;
         gameData.drawEnded = true;
         gameData.gameEnded = true;
+        gameData.setNewStepNumber();
     },
 
     initGame: () => {
@@ -61,6 +67,8 @@ let gameData = {
         gameData.drawEnded = false;
         gameData.gameEnded = false;
         gameData.errorMessage = null;
+        gameData.setNewStepNumber();
+        gameData.sessionCount = 1;
     },
 
     isSessionRunning: () => {
@@ -113,6 +121,22 @@ let gameData = {
 
     isSameThanWordToGuess: (proposal) => {
         return accentFold(proposal.toLowerCase()) == accentFold(gameData.wordToGuess.toLowerCase());
+    },
+
+    getStepNumber: () => {
+        return gameData.stepNumber;
+    },
+
+    setNewStepNumber: () => {
+        gameData.stepNumber = (new Date()).valueOf().toString();
+    },
+
+    getSessionCount: () => {
+        return gameData.sessionCount;
+    },
+
+    setSessionCount: (count) => {
+        gameData.sessionCount = count;
     }
 }
 

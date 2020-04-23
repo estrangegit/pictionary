@@ -13,7 +13,7 @@ let game = (socket) => {
         gameTransitions.startDraw(socket);
     });
 
-    socket.on(socketConstants.socketEventConstants.GAME_INIT, () => {
+    socket.on(socketConstants.socketEventConstants.INIT_GAME, () => {
         gameTransitions.initGame(socket);
     });
 

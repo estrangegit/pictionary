@@ -18,8 +18,17 @@ const startSession = (socket) => {
             connectedUsers.setHasDrawnById(drawer.id, true);
             stateGame.emitStateGame(socket);
             stateGame.broadcastStateGame(socket);
+            setTimer(socketConstants.socketTimerConstants.TIMER_30_S, gameData.getStepNumber(), startDraw, socket);
         } else {
-            endGame(socket);
+            let sessionCount = gameData.getSessionCount();
+            console.log(sessionCount);
+            if(sessionCount < 3){
+                gameData.setSessionCount(sessionCount + 1);
+                connectedUsers.initHasDrawn(false);
+                startSession(socket);
+            } else {
+                endGame(socket);
+            }
         }
     } else {
         gameData.setErrorMessage(socketConstants.socketErrorMessageConstants.INSUFFISIENT_PLAYER_NUMBER);
@@ -31,6 +40,7 @@ const startDraw = (socket) => {
     gameData.startDraw();
     stateGame.emitStateGame(socket);
     stateGame.broadcastStateGame(socket);
+    setTimer(socketConstants.socketTimerConstants.TIMER_1_M_30_S, gameData.getStepNumber(), endDraw, socket);
 };
 
 const endDraw = (socket) => {
@@ -38,6 +48,7 @@ const endDraw = (socket) => {
     gameData.endDraw();
     stateGame.emitStateGame(socket);
     stateGame.broadcastStateGame(socket);
+    setTimer(socketConstants.socketTimerConstants.TIMER_30_S, gameData.getStepNumber(), startSession, socket);
 };
 
 const endGame = (socket) => {
@@ -58,5 +69,13 @@ const initGame = (socket) => {
     socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
     socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 };
+
+const setTimer = (delay, stepNumber, transition, socket) => {
+    setTimeout(function(oldStepNumber){
+        if(oldStepNumber == gameData.getStepNumber()){
+            transition(socket);
+        }
+    }, delay, stepNumber);
+}
 
 module.exports = {startSession, startDraw, endDraw, endGame, initGame};

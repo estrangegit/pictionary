@@ -7,6 +7,7 @@ const gameTransitions = require('./socket-game-transitions');
 let connection = (socket) => {
     socket.on(socketConstants.socketEventConstants.NEW_USER, (pseudo) => {
         gameData.setErrorMessage(null);
+        gameData.setSessionCount(1);
         connectedUsers.push({ pseudo: pseudo, id: socket.id, hasDrawn: false, hasGuessed: false, score: 0 });
         socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
