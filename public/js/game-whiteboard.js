@@ -3,6 +3,7 @@ const gameWhiteboard = function (socket) {
     let $canvas = $('.whiteboard');
     let $colors = $('.color');
     let $trash = $('.clean-whiteboard span');
+    let $skipWord = $('.skip-word span');
     let context = $canvas[0].getContext('2d');
 
     let CANVAS_WIDTH = 700;
@@ -26,6 +27,10 @@ const gameWhiteboard = function (socket) {
 
     $trash.on('click', function(){
         socket.emit('clean-whiteboard');
+    });
+
+    $skipWord.on('click', function(){
+        socket.emit('skip-word');
     });
 
     $colors.on('click', onColorUpdate);

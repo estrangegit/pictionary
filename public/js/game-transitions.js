@@ -53,6 +53,7 @@ const drawStart = function (socket, data) {
     let $transitionPanel = $("#transition-panel");
     let $color = $('.color');
     let $cleanWhiteboard = $('.clean-whiteboard');
+    let $skipWord = $('.skip-word');
     let $inputProposal = $('.inputProposal');
 
     errorMessageManagement(data);
@@ -60,6 +61,7 @@ const drawStart = function (socket, data) {
     $gameOn.show();
     $color.show();
     $cleanWhiteboard.show();
+    $skipWord.show()
     $inputProposal.show();
 
     if(socket.id == data.drawer.id){
@@ -67,9 +69,11 @@ const drawStart = function (socket, data) {
         let colorWidth = $(".color").width();
         $(".color").css({ height: colorWidth + "px" });
         $(".clean-whiteboard").css({ height: colorWidth + "px" });
+        $(".skip-word").css({ height: colorWidth + "px" });
     } else {
         $color.hide();
         $cleanWhiteboard.hide();
+        $skipWord.hide();
     }
 };
 

@@ -33,18 +33,22 @@ span.pseudo-user {
     cursor: crosshair;
   }
 
-div#colors div.color, div#colors div.clean-whiteboard {
+div#colors div.color, div#colors div.clean-whiteboard, div#colors div.skip-word {
     display: inline-block;
     width: 5%;
 }
 
-div#colors div.clean-whiteboard span {
+div#colors div.clean-whiteboard span, div#colors div.skip-word span {
     font-size: 250%;
     position: relative;
     bottom: 15%;
     left: 150%;
     color: grey;
     cursor: pointer;
+}
+
+div#colors div.skip-word span {
+    left: 300%;
 }
 
 div#colors div.color.black { background-color: black; }

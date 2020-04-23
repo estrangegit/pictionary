@@ -1,4 +1,5 @@
 const socketConstants = require('../model/socketConstants');
+const gameTransitions = require('./socket-game-transitions');
 
 let whiteboard = (socket) => {
     socket.on(socketConstants.socketEventConstants.DRAWING,
@@ -7,6 +8,10 @@ let whiteboard = (socket) => {
     socket.on(socketConstants.socketEventConstants.CLEAN_WHITEBOARD, () => {
         socket.broadcast.emit(socketConstants.socketEventConstants.CLEAN_WHITEBOARD);
         socket.emit(socketConstants.socketEventConstants.CLEAN_WHITEBOARD);
+    })
+
+    socket.on(socketConstants.socketEventConstants.SKIP_WORD, () => {
+        gameTransitions.endDraw(socket);
     })
 };
 

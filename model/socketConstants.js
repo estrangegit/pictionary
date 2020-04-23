@@ -13,6 +13,7 @@ const socketEventConstants = {
     /* socket-whiteboard constants */
     DRAWING: 'drawing',
     CLEAN_WHITEBOARD: 'clean-whiteboard',
+    SKIP_WORD: 'skip-word',
 }
 
 const socketErrorMessageConstants = {
