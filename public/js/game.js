@@ -1,8 +1,8 @@
 $(function(){
     $gameOn = $('#game-on');
     $transitionPanel = $('#transition-panel');
-    $gameOn.hide();
     $transitionPanel.hide();
+    $gameOn.hide();
 
     const socket = io.connect('http://localhost:8080');
 

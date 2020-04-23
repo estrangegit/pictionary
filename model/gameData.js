@@ -79,6 +79,10 @@ let gameData = {
         return gameData.sessionStarted && gameData.drawStarted && gameData.drawEnded && gameData.gameEnded;
     },
 
+    isGameInWaitingRoom: () => {
+        return !gameData.sessionStarted && !gameData.drawStarted && !gameData.drawEnded && !gameData.gameEnded;
+    },
+
     hasSessionStarted: () => {
         return gameData.sessionStarted;
     },

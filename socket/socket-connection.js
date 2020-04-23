@@ -22,7 +22,7 @@ let connection = (socket) => {
 
         if (connectedUsers.getPseudoAndScoreList().length == 0) {
             gameData.initGame();
-        } else if(!gameData.isGameEnded() && connectedUsers.getPseudoAndScoreList().length == 1) {
+        } else if(!gameData.isGameEnded() && !gameData.isGameInWaitingRoom() && connectedUsers.getPseudoAndScoreList().length == 1) {
             gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
             gameTransitions.endGame(socket)
         } else {

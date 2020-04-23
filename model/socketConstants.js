@@ -17,8 +17,8 @@ const socketEventConstants = {
 }
 
 const socketErrorMessageConstants = {
-    INSUFFISIENT_PLAYER_NUMBER : 'Vous devez être au moins deux joueurs pour lancer une partie.',
-    DRAWER_LEFT_GAME : ' a quitté la partie.'
+    INSUFFISIENT_PLAYER_NUMBER : 'Vous devez être au moins deux joueurs pour lancer une partie',
+    DRAWER_LEFT_GAME : ' a quitté la partie'
 }
 
 const socketTimerConstants = {

@@ -3,6 +3,10 @@
    padding-bottom: 10px;
 }
 
+#game-on, #transition-panel {
+    display: none;
+}
+
 #participantList {
     padding-right: 15%;
 }

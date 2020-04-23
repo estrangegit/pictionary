@@ -21,7 +21,6 @@ const startSession = (socket) => {
             setTimer(socketConstants.socketTimerConstants.TIMER_30_S, gameData.getStepNumber(), startDraw, socket);
         } else {
             let sessionCount = gameData.getSessionCount();
-            console.log(sessionCount);
             if(sessionCount < 3){
                 gameData.setSessionCount(sessionCount + 1);
                 connectedUsers.initHasDrawn(false);
