@@ -63,8 +63,8 @@ const gameWhiteboard = function (socket) {
         let widthRatio = CANVAS_WIDTH/$canvas.width();
         let heightRatio = CANVAS_HEIGHT/$canvas.height();
         drawing = true;
-        current.x = ((e.clientX || e.touches[0].clientX) - leftPos)*widthRatio;
-        current.y = ((e.clientY || e.touches[0].clientY) - topPos)*heightRatio;
+        current.x = ((e.clientX || e.changedTouches[0].clientX) - leftPos)*widthRatio;
+        current.y = ((e.clientY || e.changedTouches[0].clientY) - topPos)*heightRatio;
     }
 
     function onMouseUp(e) {
@@ -74,7 +74,7 @@ const gameWhiteboard = function (socket) {
         let widthRatio = CANVAS_WIDTH/$canvas.width();
         let heightRatio = CANVAS_HEIGHT/$canvas.height();
         drawing = false;
-        drawLine(current.x, current.y, ((e.clientX || e.touches[0].clientX) - leftPos)*widthRatio, ((e.clientY || e.touches[0].clientY) - topPos)*heightRatio, current.color, true);
+        drawLine(current.x, current.y, ((e.clientX || e.changedTouches[0].clientX) - leftPos)*widthRatio, ((e.clientY || e.changedTouches[0].clientY) - topPos)*heightRatio, current.color, true);
     }
 
     function onMouseMove(e) {
@@ -83,9 +83,9 @@ const gameWhiteboard = function (socket) {
         let topPos = $canvas.offset().top - window.scrollY;
         let widthRatio = CANVAS_WIDTH/$canvas.width();
         let heightRatio = CANVAS_HEIGHT/$canvas.height();
-        drawLine(current.x, current.y, ((e.clientX || e.touches[0].clientX) - leftPos)*widthRatio, ((e.clientY || e.touches[0].clientY) - topPos)*heightRatio, current.color, true);
-        current.x = ((e.clientX || e.touches[0].clientX) - leftPos)*widthRatio;
-        current.y = ((e.clientY || e.touches[0].clientY) - topPos)*heightRatio;
+        drawLine(current.x, current.y, ((e.clientX || e.changedTouches[0].clientX) - leftPos)*widthRatio, ((e.clientY || e.changedTouches[0].clientY) - topPos)*heightRatio, current.color, true);
+        current.x = ((e.clientX || e.changedTouches[0].clientX) - leftPos)*widthRatio;
+        current.y = ((e.clientY || e.changedTouches[0].clientY) - topPos)*heightRatio;
     }
 
     function onColorUpdate(e) {
