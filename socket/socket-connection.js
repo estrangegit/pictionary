@@ -2,6 +2,7 @@ const connectedUsers = require("../model/connectedUsers");
 const gameData = require("../model/gameData");
 const socketConstants = require("../model/socketConstants");
 const stateGame = require('./socket-state-game');
+const gameTransitions = require('./socket-game-transitions');
 
 let connection = (socket) => {
     socket.on(socketConstants.socketEventConstants.NEW_USER, (pseudo) => {
@@ -19,10 +20,15 @@ let connection = (socket) => {
         socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 
         if (connectedUsers.getPseudoAndScoreList().length == 0) {
-            gameData.stopGame();
-        } else if(connectedUsers.getPseudoAndScoreList().length == 1) {
-            gameData.endGame();
-            stateGame.broadcastStateGame(socket);
+            gameData.initGame();
+        } else if(!gameData.isGameEnded() && connectedUsers.getPseudoAndScoreList().length == 1) {
+            gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
+            gameTransitions.gameEnd(socket)
+        } else {
+            if(gameData.isSessionRunning() && gameData.getDrawer().id == socket.id){
+                gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
+                gameTransitions.sessionEnd(socket);
+            }
         }
     });
 };

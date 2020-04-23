@@ -46,7 +46,6 @@ let gameData = {
         gameData.sessionStarted = true;
         gameData.sessionEnded = true;
         gameData.gameEnded = false;
-        gameData.errorMessage = null;
     },
 
     endGame: () => {
@@ -54,14 +53,22 @@ let gameData = {
         gameData.sessionStarted = true;
         gameData.sessionEnded = true;
         gameData.gameEnded = true;
-        gameData.errorMessage = null;
     },
 
-    stopGame: () => {
+    initGame: () => {
         gameData.gameStarted = false;
         gameData.sessionStarted = false;
         gameData.sessionEnded = false;
         gameData.gameEnded = false;
+        gameData.errorMessage = null;
+    },
+
+    isSessionRunning: () => {
+        return gameData.gameStarted && !gameData.gameEnded;
+    },
+
+    isGameEnded: () => {
+        return gameData.gameStarted && gameData.sessionStarted && gameData.sessionEnded && gameData.gameEnded;
     },
 
     hasGameStarted: () => {
