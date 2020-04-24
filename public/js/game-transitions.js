@@ -42,7 +42,7 @@ const sessionInitialization = function (socket, data) {
         message = data.drawer.pseudo + MESSAGE_TEXT_SESSION_TRANSITION_GUESSER;
         $transitionButton.hide();
     }
-    $transitionMessage.text(message);
+    $transitionMessage.html(message);
 
     $gameOn.hide();
     $transitionPanel.show();
