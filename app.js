@@ -14,7 +14,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 app.use('/pictionary', routes);
 
 app.use('*', function(req, res){
-    res.send('Error 404: not found');
+    res.render('404.ejs');
 })
 
 module.exports = app;
