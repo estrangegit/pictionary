@@ -18,7 +18,11 @@ router.get('/', function(req, res){
 router.get('/game', function(req, res){
     let pseudo = req.cookies['pseudo'];
     res.clearCookie('pseudo', {httpOnly: true});
-    res.render('game.ejs', {pseudo: pseudo});
+    if(typeof pseudo !== 'undefined') {
+        res.render('game.ejs', {pseudo: pseudo});
+    } else {
+        res.redirect('/pictionary');
+    }
 });
 
 router.post('/pseudo', urlEncodedParser, function(req, res){
