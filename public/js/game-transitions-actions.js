@@ -2,13 +2,13 @@ const gameTransitions = function(socket){
     let $transitionButton = $('#transition-button');
 
     $transitionButton.click(() => {
-        if($transitionButton.text() == BUTTON_TEXT_LANCER_PARTIE) {
+        if($transitionButton.html() == BUTTON_TEXT_LANCER_PARTIE) {
             socket.emit('start-session');
-        } else if($transitionButton.text() == BUTTON_TEXT_DESSINER_MOT) {
+        } else if($transitionButton.html() == BUTTON_TEXT_DESSINER_MOT) {
             socket.emit('start-draw');
-        } else if($transitionButton.text() == BUTTON_TEXT_POURSUIVRE_JEU) {
+        } else if($transitionButton.html() == BUTTON_TEXT_POURSUIVRE_JEU) {
             socket.emit('start-session');
-        } else if($transitionButton.text() == BUTTON_TEXT_REJOUER) {
+        } else if($transitionButton.html() == BUTTON_TEXT_REJOUER) {
             socket.emit('init-game');
         }
     })

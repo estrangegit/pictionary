@@ -2,7 +2,7 @@ const errorMessageManagement = function(data){
     let $transitionErrorMessage = $('#transition-error-message');
 
     if(data.errorMessage) {
-        $transitionErrorMessage.text(data.errorMessage);
+        $transitionErrorMessage.html(data.errorMessage);
         $transitionErrorMessage.show();
     } else {
         $transitionErrorMessage.empty();
@@ -17,8 +17,8 @@ const waitingRoom = function(socket, data) {
     let $transitionButton = $('#transition-button');
 
     errorMessageManagement(data);
-    $transitionButton.text(BUTTON_TEXT_LANCER_PARTIE);
-    $transitionMessage.text(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
+    $transitionButton.html(BUTTON_TEXT_LANCER_PARTIE);
+    $transitionMessage.html(MESSAGE_TEXT_ATTENTE_PARTICIPANTS);
     $gameOn.hide();
     $transitionPanel.show();
     $transitionButton.show();
@@ -32,7 +32,7 @@ const sessionInitialization = function (socket, data) {
     let $transitionButton = $('#transition-button');
 
     errorMessageManagement(data);
-    $transitionButton.text(BUTTON_TEXT_DESSINER_MOT);
+    $transitionButton.html(BUTTON_TEXT_DESSINER_MOT);
     $transitionButton.show();
 
     let message = ''
@@ -85,8 +85,8 @@ const drawEnd = function(socket, data) {
     let $proposals = $('#proposals');
 
     errorMessageManagement(data);
-    $transitionButton.text(BUTTON_TEXT_POURSUIVRE_JEU);
-    $transitionMessage.text(MESSAGE_TEXT_MOT_A_DEVINER + data.wordToGuess);
+    $transitionButton.html(BUTTON_TEXT_POURSUIVRE_JEU);
+    $transitionMessage.html(MESSAGE_TEXT_MOT_A_DEVINER + data.wordToGuess);
     $gameOn.hide();
     $transitionPanel.show();
     $transitionButton.show();
@@ -106,8 +106,8 @@ const gameEnd = function(socket, data) {
     let scoreString = data.scores.map(pseudoScore => pseudoScore.pseudo + ' - ' + pseudoScore.score + ' points').join(', ');
 
     errorMessageManagement(data);
-    $transitionButton.text(BUTTON_TEXT_REJOUER);
-    $transitionMessage.text(MESSAGE_TEXT_SCORE + scoreString);
+    $transitionButton.html(BUTTON_TEXT_REJOUER);
+    $transitionMessage.html(MESSAGE_TEXT_SCORE + scoreString);
     $gameOn.hide();
     $transitionPanel.show();
     $transitionButton.show();

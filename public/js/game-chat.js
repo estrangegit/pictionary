@@ -24,15 +24,15 @@ const gameChat = function (socket) {
     const addChatProposal = (data) => {
         let $pseudoSpan;
         if(data.pseudo == pseudo){
-            $pseudoSpan = $('<span class="pseudo-user">').text(data.pseudo)
+            $pseudoSpan = $('<span class="pseudo-user">').html(data.pseudo)
                 .css('color', getPseudoColor(data.pseudo));
         } else {
-            $pseudoSpan = $('<span>').text(data.pseudo)
+            $pseudoSpan = $('<span>').html(data.pseudo)
                 .css('color', getPseudoColor(data.pseudo));
         }
         $pseudoSpan = $pseudoSpan.css('color', getPseudoColor(data.pseudo));
 
-        let $proposalSpan = $('<span class="proposal">').text(': ' + data.proposal);
+        let $proposalSpan = $('<span class="proposal">').html(': ' + data.proposal);
         let $proposalLi = $('<li>').append($pseudoSpan, $proposalSpan);
         $proposals.append($proposalLi);
         $proposals[0].scrollTop = $proposals[0].scrollHeight;
