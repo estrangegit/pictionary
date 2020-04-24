@@ -1,6 +1,7 @@
 $(function(){
-    $gameOn = $('#game-on');
-    $transitionPanel = $('#transition-panel');
+    const $gameOn = $('#game-on');
+    const $transitionPanel = $('#transition-panel');
+
     $transitionPanel.hide();
     $gameOn.hide();
 

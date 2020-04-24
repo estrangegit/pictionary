@@ -1,5 +1,5 @@
 const errorMessageManagement = function(data){
-    let $transitionErrorMessage = $('#transition-error-message');
+    const $transitionErrorMessage = $('#transition-error-message');
 
     if(data.errorMessage) {
         $transitionErrorMessage.html(data.errorMessage);
@@ -11,10 +11,10 @@ const errorMessageManagement = function(data){
 }
 
 const waitingRoom = function(socket, data) {
-    let $gameOn = $("#game-on");
-    let $transitionPanel = $("#transition-panel");
-    let $transitionMessage = $('#transition-message');
-    let $transitionButton = $('#transition-button');
+    const $gameOn = $("#game-on");
+    const $transitionPanel = $("#transition-panel");
+    const $transitionMessage = $('#transition-message');
+    const $transitionButton = $('#transition-button');
 
     errorMessageManagement(data);
     $transitionButton.html(BUTTON_TEXT_LANCER_PARTIE);
@@ -26,10 +26,10 @@ const waitingRoom = function(socket, data) {
 }
 
 const sessionInitialization = function (socket, data) {
-    let $gameOn = $("#game-on");
-    let $transitionPanel = $("#transition-panel");
-    let $transitionMessage = $('#transition-message');
-    let $transitionButton = $('#transition-button');
+    const $gameOn = $("#game-on");
+    const $transitionPanel = $("#transition-panel");
+    const $transitionMessage = $('#transition-message');
+    const $transitionButton = $('#transition-button');
 
     errorMessageManagement(data);
     $transitionButton.html(BUTTON_TEXT_DESSINER_MOT);
@@ -49,12 +49,17 @@ const sessionInitialization = function (socket, data) {
 };
 
 const drawStart = function (socket, data) {
-    let $gameOn = $("#game-on");
-    let $transitionPanel = $("#transition-panel");
-    let $color = $('.color');
-    let $cleanWhiteboard = $('.clean-whiteboard');
-    let $skipWord = $('.skip-word');
-    let $inputProposal = $('.inputProposal');
+    const $gameOn = $("#game-on");
+    const $transitionPanel = $("#transition-panel");
+    const $color = $('.color');
+    const $cleanWhiteboard = $('.clean-whiteboard');
+    const $skipWord = $('.skip-word');
+    const $inputProposal = $('.inputProposal');
+    const $informationPanel = $('#information-panel');
+    const $colors = $('#colors');
+    const $drawArea = $('#drawArea');
+    const $chatArea = $('#chatArea');
+    const $window = $(window);
 
     errorMessageManagement(data);
     $transitionPanel.hide();
@@ -75,14 +80,24 @@ const drawStart = function (socket, data) {
         $cleanWhiteboard.hide();
         $skipWord.hide();
     }
+
+    const sizeGamePanel = function(){
+        $gameOn.css('height',$window.height()-$informationPanel.height());
+        $transitionPanel.css('height',$window.height()-$informationPanel.height());
+        $drawArea.css('height', ($gameOn.height()-$colors.height())*0.9);
+        $chatArea.css('height', ($gameOn.height()-$colors.height())*0.9);
+    }
+
+    sizeGamePanel();
+    $window.resize(sizeGamePanel);
 };
 
 const drawEnd = function(socket, data) {
-    let $gameOn = $("#game-on");
-    let $transitionPanel = $("#transition-panel");
-    let $transitionMessage = $('#transition-message');
-    let $transitionButton = $('#transition-button');
-    let $proposals = $('#proposals');
+    const $gameOn = $("#game-on");
+    const $transitionPanel = $("#transition-panel");
+    const $transitionMessage = $('#transition-message');
+    const $transitionButton = $('#transition-button');
+    const $proposals = $('#proposals');
 
     errorMessageManagement(data);
     $transitionButton.html(BUTTON_TEXT_POURSUIVRE_JEU);
@@ -97,13 +112,13 @@ const drawEnd = function(socket, data) {
 }
 
 const gameEnd = function(socket, data) {
-    let $gameOn = $("#game-on");
-    let $transitionPanel = $("#transition-panel");
-    let $transitionMessage = $('#transition-message');
-    let $transitionButton = $('#transition-button');
-    let $proposals = $('#proposals');
+    const $gameOn = $("#game-on");
+    const $transitionPanel = $("#transition-panel");
+    const $transitionMessage = $('#transition-message');
+    const $transitionButton = $('#transition-button');
+    const $proposals = $('#proposals');
 
-    let scoreString = data.scores.map(pseudoScore => pseudoScore.pseudo + ' - ' + pseudoScore.score + ' points').join(', ');
+    const scoreString = data.scores.map(pseudoScore => pseudoScore.pseudo + ' - ' + pseudoScore.score + ' points').join(', ');
 
     errorMessageManagement(data);
     $transitionButton.html(BUTTON_TEXT_REJOUER);
