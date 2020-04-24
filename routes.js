@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const urlEncodedParser = bodyParser.urlencoded({extended: false});
 const connectedUsers = require('./model/connectedUsers');
+const ent = require('ent');
 
 router.get('/', function(req, res){
     let error = req.cookies['error'];
@@ -22,7 +23,7 @@ router.get('/game', function(req, res){
 
 router.post('/pseudo', urlEncodedParser, function(req, res){
     if(req.body.pseudo.trim().length > 0){
-        let pseudo = req.body.pseudo.trim();
+        let pseudo = ent.encode(req.body.pseudo.trim());
         if(connectedUsers.doesPseudoExist(pseudo)){
             res.cookie('error', 'Ce pseudo a déjà été choisi', {httpOnly: true});
             res.redirect('/pictionary');
