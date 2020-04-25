@@ -12,7 +12,6 @@ let connection = (socket) => {
         socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
         stateGame.emitStateGame(socket);
-        stateGame.broadcastStateGame(socket);
     });
 
     socket.on(socketConstants.socketEventConstants.DISCONNECT, () => {
