@@ -29,6 +29,9 @@ let connection = (socket) => {
             if(gameData.isSessionRunning() && gameData.getDrawer().id == socket.id){
                 gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
                 gameTransitions.endDraw(socket);
+            } else if (gameData.isGameInDrawingStep() && connectedUsers.getNbConnectedUsersWhoHasNotGuessed() == 0){
+                gameData.setErrorMessage(pseudo + socketConstants.socketErrorMessageConstants.DRAWER_LEFT_GAME);
+                gameTransitions.endDraw(socket);
             }
         }
     });
