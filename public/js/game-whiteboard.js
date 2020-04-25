@@ -83,6 +83,7 @@ const gameWhiteboard = function (socket) {
     }
 
     function onMouseMove(e) {
+        e.preventDefault();
         if (!drawing) { return; }
         let leftPos = $canvas.offset().left - window.scrollX;
         let topPos = $canvas.offset().top - window.scrollY;
