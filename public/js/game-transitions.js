@@ -49,8 +49,9 @@ const sessionInitialization = function (socket, data) {
 };
 
 const drawStart = function (socket, data) {
-    const $gameOn = $("#game-on");
-    const $transitionPanel = $("#transition-panel");
+    const $gameOn = $('#game-on');
+    const $wordToGuess = $('#wordToGuess');
+    const $transitionPanel = $('#transition-panel');
     const $color = $('.color');
     const $cleanWhiteboard = $('.clean-whiteboard');
     const $skipWord = $('.skip-word');
@@ -70,15 +71,17 @@ const drawStart = function (socket, data) {
 
     const sizeGamePanel = function() {
         $gameOn.css('height',$window.height()-$informationPanel.height());
-        $transitionPanel.css('height',$window.height()-$informationPanel.height());
-        $drawArea.css('height', ($gameOn.height()-$colors.height())*0.9);
-        $chatArea.css('height', ($gameOn.height()-$colors.height())*0.9);
+        $drawArea.css('height', ($gameOn.height()-$colors.height())*0.65);
+        $chatArea.css('height', ($gameOn.height()-$colors.height())*0.65);
     }
 
     const onResize = function() {
         sizeColorsAndIcons();
         sizeGamePanel();
     }
+
+    sizeGamePanel();
+    $window.resize(onResize);
 
     errorMessageManagement(data);
     $transitionPanel.hide();
@@ -90,15 +93,14 @@ const drawStart = function (socket, data) {
 
     if(socket.id == data.drawer.id){
         $inputProposal.hide();
+        $wordToGuess.html(data.wordToGuess);
         sizeColorsAndIcons();
     } else {
         $color.hide();
         $cleanWhiteboard.hide();
         $skipWord.hide();
+        $wordToGuess.html(data.hiddenWord);
     }
-
-    sizeGamePanel();
-    $window.resize(onResize);
 };
 
 const drawEnd = function(socket, data) {

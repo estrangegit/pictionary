@@ -10,6 +10,7 @@ const emitStateGame = (socket) => {
                                                 scores: connectedUsers.getPseudoAndScoreList(),
                                                 drawer: gameData.getDrawer(),
                                                 wordToGuess: gameData.wordToGuess,
+                                                hiddenWord: gameData.getHiddenWordToGuess(),
                                                 errorMessage: gameData.errorMessage });
 }
 
@@ -21,6 +22,7 @@ const broadcastStateGame = (socket) => {
                                                 scores: connectedUsers.getPseudoAndScoreList(),
                                                 drawer: gameData.getDrawer(),
                                                 wordToGuess: gameData.wordToGuess,
+                                                hiddenWord: gameData.getHiddenWordToGuess(),
                                                 errorMessage: gameData.errorMessage });
 }
 

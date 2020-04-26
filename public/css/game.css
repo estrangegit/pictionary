@@ -7,6 +7,10 @@
     display: none;
 }
 
+#game-on #wordToGuess {
+    letter-spacing: 0.2em;
+}
+
 #participantList {
     padding-right: 15%;
 }

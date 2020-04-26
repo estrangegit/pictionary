@@ -1,7 +1,7 @@
 const accentFold = function(inStr) {
     return inStr.replace(
-        /([àáâãäå])|([çčć])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g,
-        function (str, a, c, e, i, n, o, s, u, y, ae) {
+        /([àáâãäå])|([çčć])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])|([œ])/g,
+        function (str, a, c, e, i, n, o, s, u, y, ae, oe) {
             if (a) return 'a';
             if (c) return 'c';
             if (e) return 'e';
@@ -12,6 +12,16 @@ const accentFold = function(inStr) {
             if (u) return 'u';
             if (y) return 'y';
             if (ae) return 'ae';
+            if (oe) return 'oe';
+        }
+    );
+}
+
+const hideAlphaLetters = function(inStr) {
+    return inStr.replace(
+        /([a-z])/g,
+        function (str, l) {
+            if (l) return '_';
         }
     );
 }
@@ -105,6 +115,10 @@ let gameData = {
 
     getWordToGuess: () => {
         return gameData.wordToGuess;
+    },
+
+    getHiddenWordToGuess: () => {
+        return gameData.wordToGuess == null ? null : hideAlphaLetters(accentFold(gameData.wordToGuess.toLowerCase()));
     },
 
     setWordToGuess: (word) => {
