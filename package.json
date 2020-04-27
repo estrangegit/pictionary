@@ -12,7 +12,7 @@
     "exec": "ts-node -r dotenv/config ./src/server.ts"
   },
   "scripts": {
-    "clean": "rimraf ./dist/*",
+    "clean": "rimraf ./dist/{*,.*}",
     "lint": "eslint . --ext .ts",
     "copy-assets": "ts-node tools/copyAssets",
     "create-env-file": "ts-node -r dotenv/config tools/createEnvFile",
