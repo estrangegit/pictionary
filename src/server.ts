@@ -1,8 +1,9 @@
-const http = require('http');
-const app = require('./app');
-const game = require('./socket/socket-game');
+import http from 'http';
+import app from './app';
+import game from './socket/socket-game';
 
-const normalizePort = val => {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+const normalizePort = (val: any): any => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -13,12 +14,15 @@ const normalizePort = val => {
   }
   return false;
 };
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 const port = normalizePort(process.env.SERVER_PORT || '8080');
 
 app.set('port', port);
 
-const errorHandler = error => {
+const server = http.createServer(app);
+
+const errorHandler = (error: NodeJS.ErrnoException): void => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -28,15 +32,16 @@ const errorHandler = error => {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges.');
       process.exit(1);
+      break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use.');
       process.exit(1);
+      break;
     default:
       throw error;
   }
 };
 
-const server = http.createServer(app);
 
 server.on('error', errorHandler);
 
