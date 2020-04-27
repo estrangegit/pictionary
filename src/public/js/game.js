@@ -5,7 +5,7 @@ $(function(){
     $transitionPanel.hide();
     $gameOn.hide();
 
-    const socket = io.connect('http://localhost:8080');
+    const socket = io.connect('http://' + env.SERVER_HOST_NAME + ':' + env.SERVER_PORT);
 
     gameConnection(socket);
     gamePlayerList(socket);
