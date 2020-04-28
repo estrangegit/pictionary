@@ -4,7 +4,7 @@ import PseudoAndScore from './PseudoAndScore';
 interface ConnectedUsers {
     users: User[];
     push(user: User): void;
-    remove(pseudo: string): void;
+    remove(pseudo: string|null): void;
     getPseudoAndScoreList(): PseudoAndScore[];
     getIdListWhoHasNotDrawn(): string[];
     getNbConnectedUsersWhoHasNotGuessed(): number;
@@ -26,7 +26,7 @@ const connectedUsers: ConnectedUsers = {
             connectedUsers.users.push(user);
         }
     },
-    remove : (pseudo: string): void => {
+    remove : (pseudo: string|null): void => {
         connectedUsers.users = connectedUsers.users.filter(user => user.pseudo != pseudo);
     },
     getPseudoAndScoreList : (): PseudoAndScore[] => {

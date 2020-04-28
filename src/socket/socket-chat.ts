@@ -1,47 +1,49 @@
 import connectedUsers from '../model/connectedUsers';
 import gameData from '../model/gameData';
-const socketConstants = require('../model/socketConstants');
-const gameTransitions = require('./socket-game-transitions');
+import User from '../model/User';
+import endDraw from './socket-transitions/endDraw';
+import { socketEventConstants } from '../model/socketConstants';
+import { Socket } from 'socket.io';
 
-let chat = (socket) => {
-    socket.on(socketConstants.socketEventConstants.NEW_PROPOSAL, (proposal) => {
+const chat = (socket: Socket): void => {
+    socket.on(socketEventConstants.NEW_PROPOSAL, (proposal) => {
 
-        let pseudo = connectedUsers.getPseudoById(socket.id);
+        const pseudo = connectedUsers.getPseudoById(socket.id);
 
         if(gameData.isSameThanWordToGuess(proposal)){
             let nbConnectedUsersWhoHasNotGuessed = connectedUsers.getNbConnectedUsersWhoHasNotGuessed();
-            let drawer = gameData.getDrawer();
+            const drawer: User = gameData.getDrawer();
 
             connectedUsers.addScoreById(drawer.id, 10);
             connectedUsers.addScoreById(socket.id, 10 * nbConnectedUsersWhoHasNotGuessed);
             connectedUsers.setHasGuessedById(socket.id, true);
 
-            socket.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
-            socket.broadcast.emit(socketConstants.socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+            socket.emit(socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
+            socket.broadcast.emit(socketEventConstants.PARTICIPANT_LIST, connectedUsers.getPseudoAndScoreList());
 
             nbConnectedUsersWhoHasNotGuessed = connectedUsers.getNbConnectedUsersWhoHasNotGuessed();
 
-            socket.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
+            socket.emit(socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: 'Bravo!',
                 hasGuessed: true
             });
-            socket.broadcast.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
+            socket.broadcast.emit(socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: 'Mot trouvé!',
                 hasGuessed: false
             });
 
             if(nbConnectedUsersWhoHasNotGuessed == 0) {
-                gameTransitions.endDraw(socket);
+                endDraw(socket);
             }
         } else {
-            socket.broadcast.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
+            socket.broadcast.emit(socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: proposal,
                 hasGuessed: false
             });
-            socket.emit(socketConstants.socketEventConstants.NEW_PROPOSAL, {
+            socket.emit(socketEventConstants.NEW_PROPOSAL, {
                 pseudo: pseudo,
                 proposal: proposal,
                 hasGuessed: false
@@ -50,4 +52,4 @@ let chat = (socket) => {
     });
 };
 
-module.exports = chat;
+export default chat;

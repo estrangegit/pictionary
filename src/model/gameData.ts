@@ -47,7 +47,7 @@ interface GameData {
     drawEnded: boolean;
     gameEnded: boolean;
     wordToGuess: string;
-    drawer: User|null;
+    drawer: User;
     errorMessage: string|null;
     stepNumber: string|null;
     sessionCount: number;
@@ -67,7 +67,7 @@ interface GameData {
     getWordToGuess(): string;
     getHiddenWordToGuess(): string|null;
     setWordToGuess(word: string): void;
-    getDrawer(): User|null;
+    getDrawer(): User;
     setDrawer(user: User|null): void;
     getErrorMessage(): string|null;
     setErrorMessage(errorMessage: string|null): void;
@@ -84,7 +84,7 @@ const gameData: GameData = {
     drawEnded: false,
     gameEnded: false,
     wordToGuess: '',
-    drawer: null,
+    drawer: {id: '', pseudo:'', hasDrawn: false, hasGuessed: false, score: 0},
     errorMessage: null,
     stepNumber: null,
     sessionCount: 1,
@@ -177,11 +177,11 @@ const gameData: GameData = {
         gameData.wordToGuess = word;
     },
 
-    getDrawer: (): User|null => {
+    getDrawer: (): User => {
         return gameData.drawer;
     },
 
-    setDrawer: (user: User|null): void => {
+    setDrawer: (user: User): void => {
         gameData.drawer = user;
     },
 

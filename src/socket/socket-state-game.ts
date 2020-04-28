@@ -1,9 +1,10 @@
 import connectedUsers from '../model/connectedUsers';
 import gameData from '../model/gameData';
-const socketConstants = require('../model/socketConstants');
+import { socketEventConstants } from '../model/socketConstants';
+import { Socket } from 'socket.io';
 
-const emitStateGame = (socket) => {
-    socket.emit(socketConstants.socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
+const emitStateGame = (socket: Socket): void => {
+    socket.emit(socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
                                                 hasDrawStarted: gameData.hasDrawStarted(),
                                                 hasDrawEnded: gameData.hasDrawEnded(),
                                                 hasGameEnded: gameData.hasGameEnded(),
@@ -14,8 +15,8 @@ const emitStateGame = (socket) => {
                                                 errorMessage: gameData.errorMessage });
 }
 
-const broadcastStateGame = (socket) => {
-    socket.broadcast.emit(socketConstants.socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
+const broadcastStateGame = (socket: Socket): void => {
+    socket.broadcast.emit(socketEventConstants.STATE_GAME, { hasSessionStarted: gameData.hasSessionStarted(),
                                                 hasDrawStarted: gameData.hasDrawStarted(),
                                                 hasDrawEnded: gameData.hasDrawEnded(),
                                                 hasGameEnded: gameData.hasGameEnded(),
@@ -26,4 +27,4 @@ const broadcastStateGame = (socket) => {
                                                 errorMessage: gameData.errorMessage });
 }
 
-module.exports = {emitStateGame, broadcastStateGame};
+export {emitStateGame, broadcastStateGame};
