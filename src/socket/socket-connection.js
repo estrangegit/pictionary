@@ -1,5 +1,5 @@
 import connectedUsers from '../model/connectedUsers';
-const gameData = require("../model/gameData");
+import gameData from '../model/gameData';
 const socketConstants = require("../model/socketConstants");
 const stateGame = require('./socket-state-game');
 const gameTransitions = require('./socket-game-transitions');

@@ -1,7 +1,20 @@
-const accentFold = function(inStr) {
+import User from "./User";
+
+const accentFold = function(inStr: string): string {
     return inStr.replace(
         /([àáâãäå])|([çčć])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])|([œ])/g,
-        function (str, a, c, e, i, n, o, s, u, y, ae, oe) {
+        function (str: string,
+                    a: string,
+                    c: string,
+                    e: string,
+                    i: string,
+                    n: string,
+                    o: string,
+                    s: string,
+                    u: string,
+                    y: string,
+                    ae: string,
+                    oe: string): string {
             if (a) return 'a';
             if (c) return 'c';
             if (e) return 'e';
@@ -13,20 +26,59 @@ const accentFold = function(inStr) {
             if (y) return 'y';
             if (ae) return 'ae';
             if (oe) return 'oe';
+            return '';
         }
     );
 }
 
-const hideAlphaLetters = function(inStr) {
+const hideAlphaLetters = function(inStr: string): string {
     return inStr.replace(
         /([a-z])/g,
         function (str, l) {
             if (l) return '_';
+            return '';
         }
     );
 }
 
-let gameData = {
+interface GameData {
+    sessionStarted: boolean;
+    drawStarted: boolean;
+    drawEnded: boolean;
+    gameEnded: boolean;
+    wordToGuess: string;
+    drawer: User|null;
+    errorMessage: string|null;
+    stepNumber: string|null;
+    sessionCount: number;
+    startSession(): void;
+    startDraw(): void;
+    endDraw(): void;
+    endGame(): void;
+    initGame(): void;
+    isSessionRunning(): boolean;
+    isGameEnded(): boolean;
+    isGameInWaitingRoom(): boolean;
+    isGameInDrawingStep(): boolean;
+    hasSessionStarted(): boolean;
+    hasDrawStarted(): boolean;
+    hasDrawEnded(): boolean;
+    hasGameEnded(): boolean;
+    getWordToGuess(): string;
+    getHiddenWordToGuess(): string|null;
+    setWordToGuess(word: string): void;
+    getDrawer(): User|null;
+    setDrawer(user: User|null): void;
+    getErrorMessage(): string|null;
+    setErrorMessage(errorMessage: string|null): void;
+    isSameThanWordToGuess(proposal: string): boolean;
+    getStepNumber(): string|null;
+    setNewStepNumber(): void;
+    getSessionCount(): number;
+    setSessionCount(count: number): void;
+}
+
+const gameData: GameData = {
     sessionStarted : false,
     drawStarted: false,
     drawEnded: false,
@@ -37,7 +89,7 @@ let gameData = {
     stepNumber: null,
     sessionCount: 1,
 
-    startSession: () => {
+    startSession: (): void => {
         gameData.sessionStarted = true;
         gameData.drawStarted = false;
         gameData.drawEnded = false;
@@ -46,7 +98,7 @@ let gameData = {
         gameData.setNewStepNumber();
     },
 
-    startDraw: () => {
+    startDraw: (): void => {
         gameData.sessionStarted = true;
         gameData.drawStarted = true;
         gameData.drawEnded = false;
@@ -55,7 +107,7 @@ let gameData = {
         gameData.setNewStepNumber();
     },
 
-    endDraw: () => {
+    endDraw: (): void => {
         gameData.sessionStarted = true;
         gameData.drawStarted = true;
         gameData.drawEnded = true;
@@ -63,7 +115,7 @@ let gameData = {
         gameData.setNewStepNumber();
     },
 
-    endGame: () => {
+    endGame: (): void => {
         gameData.sessionStarted = true;
         gameData.drawStarted = true;
         gameData.drawEnded = true;
@@ -71,7 +123,7 @@ let gameData = {
         gameData.setNewStepNumber();
     },
 
-    initGame: () => {
+    initGame: (): void => {
         gameData.sessionStarted = false;
         gameData.drawStarted = false;
         gameData.drawEnded = false;
@@ -81,85 +133,85 @@ let gameData = {
         gameData.sessionCount = 1;
     },
 
-    isSessionRunning: () => {
+    isSessionRunning: (): boolean => {
         return gameData.sessionStarted && !gameData.gameEnded;
     },
 
-    isGameEnded: () => {
+    isGameEnded: (): boolean => {
         return gameData.sessionStarted && gameData.drawStarted && gameData.drawEnded && gameData.gameEnded;
     },
 
-    isGameInWaitingRoom: () => {
+    isGameInWaitingRoom: (): boolean => {
         return !gameData.sessionStarted && !gameData.drawStarted && !gameData.drawEnded && !gameData.gameEnded;
     },
 
-    isGameInDrawingStep: () => {
+    isGameInDrawingStep: (): boolean => {
         return gameData.sessionStarted && gameData.drawStarted && !gameData.drawEnded && !gameData.gameEnded;
     },
 
-    hasSessionStarted: () => {
+    hasSessionStarted: (): boolean => {
         return gameData.sessionStarted;
     },
 
-    hasDrawStarted: () => {
+    hasDrawStarted: (): boolean => {
         return gameData.drawStarted;
     },
 
-    hasDrawEnded: () => {
+    hasDrawEnded: (): boolean => {
         return gameData.drawEnded;
     },
 
-    hasGameEnded: () => {
+    hasGameEnded: (): boolean => {
         return gameData.gameEnded;
     },
 
-    getWordToGuess: () => {
+    getWordToGuess: (): string => {
         return gameData.wordToGuess;
     },
 
-    getHiddenWordToGuess: () => {
+    getHiddenWordToGuess: (): string|null => {
         return gameData.wordToGuess == null ? null : hideAlphaLetters(accentFold(gameData.wordToGuess.toLowerCase()));
     },
 
-    setWordToGuess: (word) => {
+    setWordToGuess: (word: string): void => {
         gameData.wordToGuess = word;
     },
 
-    getDrawer: () => {
+    getDrawer: (): User|null => {
         return gameData.drawer;
     },
 
-    setDrawer: (user) => {
+    setDrawer: (user: User|null): void => {
         gameData.drawer = user;
     },
 
-    getErrorMessage: () => {
+    getErrorMessage: (): string|null => {
         return gameData.errorMessage;
     },
 
-    setErrorMessage: (errorMessage) => {
+    setErrorMessage: (errorMessage: string|null): void => {
         gameData.errorMessage = errorMessage;
     },
 
-    isSameThanWordToGuess: (proposal) => {
+    isSameThanWordToGuess: (proposal: string): boolean => {
         return accentFold(proposal.toLowerCase()) == accentFold(gameData.wordToGuess.toLowerCase());
     },
 
-    getStepNumber: () => {
+    getStepNumber: (): string|null => {
         return gameData.stepNumber;
     },
 
-    setNewStepNumber: () => {
+    setNewStepNumber: (): void => {
         gameData.stepNumber = (new Date()).valueOf().toString();
     },
 
-    getSessionCount: () => {
+    getSessionCount: (): number => {
         return gameData.sessionCount;
     },
 
-    setSessionCount: (count) => {
+    setSessionCount: (count: number): void => {
         gameData.sessionCount = count;
     }
 }
 
-module.exports = gameData;
+export default gameData;

@@ -1,6 +1,6 @@
 import connectedUsers from '../model/connectedUsers';
+import gameData from '../model/gameData';
 const socketConstants = require('../model/socketConstants');
-const gameData = require("../model/gameData");
 const gameTransitions = require('./socket-game-transitions');
 
 let chat = (socket) => {
