@@ -1,4 +1,4 @@
-const connectedUsers = require('../model/connectedUsers')
+import connectedUsers from '../model/connectedUsers';
 const socketConstants = require('../model/socketConstants');
 const gameData = require("../model/gameData");
 const gameTransitions = require('./socket-game-transitions');

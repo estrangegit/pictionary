@@ -1,5 +1,5 @@
+import connectedUsers from '../model/connectedUsers';
 const socketConstants = require('../model/socketConstants');
-const connectedUsers = require("../model/connectedUsers");
 const gameData = require("../model/gameData");
 
 const emitStateGame = (socket) => {
