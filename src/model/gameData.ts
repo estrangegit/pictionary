@@ -65,7 +65,7 @@ interface GameData {
     hasDrawEnded(): boolean;
     hasGameEnded(): boolean;
     getWordToGuess(): string;
-    getHiddenWordToGuess(): string|null;
+    getHiddenWordToGuess(): string;
     setWordToGuess(word: string): void;
     getDrawer(): User;
     setDrawer(user: User|null): void;
@@ -169,8 +169,8 @@ const gameData: GameData = {
         return gameData.wordToGuess;
     },
 
-    getHiddenWordToGuess: (): string|null => {
-        return gameData.wordToGuess == null ? null : hideAlphaLetters(accentFold(gameData.wordToGuess.toLowerCase()));
+    getHiddenWordToGuess: (): string => {
+        return hideAlphaLetters(accentFold(gameData.wordToGuess.toLowerCase()));
     },
 
     setWordToGuess: (word: string): void => {
