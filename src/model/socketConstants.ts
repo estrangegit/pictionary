@@ -28,4 +28,4 @@ const socketTimerConstants = {
     TIMER_1_M_30_S : 1 * 60 * 1000 + 30 * 1000,
 }
 
-module.exports = { socketEventConstants, socketErrorMessageConstants, socketTimerConstants };
+export { socketEventConstants, socketErrorMessageConstants, socketTimerConstants };
