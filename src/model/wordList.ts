@@ -1,4 +1,9 @@
-const wordList = {
+interface WordList {
+    list: string[];
+    getRandomWord(): string;
+}
+
+const wordList: WordList = {
     list: ["14-Juillet",
             "1er-Avril",
             "Abeille",
@@ -857,9 +862,9 @@ const wordList = {
             "Zeus",
             "Zombie",
             "Zoo"],
-    getRandomWord: () => {
+    getRandomWord: (): string => {
         return wordList.list[Math.floor(Math.random() * wordList.list.length)];
     },
 }
 
-module.exports = wordList;
+export default wordList;
