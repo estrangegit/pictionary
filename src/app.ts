@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
-const routes = require('./routes');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import path from 'path';
+import router from './routes';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -11,10 +11,10 @@ app.use(cookieParser());
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use('/pictionary', routes);
+app.use('/pictionary', router);
 
 app.use('*', function(req, res){
     res.render('404.ejs');
 })
 
-module.exports = app;
+export default app;

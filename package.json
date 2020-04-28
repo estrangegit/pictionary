@@ -2,7 +2,7 @@
   "name": "pictionary",
   "version": "1.0.0",
   "description": "interactive pictionary game",
-  "main": "server.js",
+  "main": "server",
   "nodemonConfig": {
     "watch": [
       "src"
@@ -36,6 +36,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.6",
     "@types/node": "^13.13.4",
